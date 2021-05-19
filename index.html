@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html>
+  <head>
+
+    <meta charset="utf-8">
+    <title>IKKEditor</title>
+
+    <!-- Fontfamily -->
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@100;400&display=swap" rel="stylesheet">
+    <!-- Icon -->
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.15.3/css/all.css" crossorigin="anonymous">
+
+    <link rel="stylesheet" href="style.css" media="screen">
+  </head>
+
+  <body>
+
+    <header>
+      <a href="#"><h1 class="site-title"><i class="fas fa-image"></i>IKKEditor</h1></a>
+      <nav class="menubar">
+        <ul class="menulist">
+          <li class="menuitem menulink active"><a href="#">Home</a></li>
+          <li class="menuitem menulink"><a href="#">Gallery</a></li>
+        </ul>
+      </nav>
+    </header>
+
+    <button type="button" id="upload-photo-button"><i class="far fa-image"></i><p>Upload your photos</p></button>
+
+    <main class="menu-button-container">
+      <article class="menu-button">
+        <button type="button"><i class="fas fa-paint-brush"></i><p>Paint</p></button>
+        <button type="button"><i class="fas fa-adjust"></i><p>Adjustment</p></button>
+        <button type="button"><i class="fas fa-crop-alt"></i><p>Crop</p></button>
+        <button type="button"><i class="far fa-save"></i><p>Save</p></button>
+        <button type="button"><i class="far fa-trash-alt"></i><p>Delete</p></button>
+      </article>
+    </main>
+
+    <div id="paint-tool-bar" class="tool-bar">
+      <input type="color" id="color-picker" name="paint-color" value="#000000">
+    </div>
+
+  </body>
+</html>

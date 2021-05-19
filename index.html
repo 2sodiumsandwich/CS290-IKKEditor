@@ -37,9 +37,41 @@
       </article>
     </main>
 
+<!-- The sections below are about the functions of each menu -->
+    <canvas id="photo-canvas" width="500" height="500">
+      <!-- This field is for the user's photo. Need javascript. -->
+    </canvas>
+
+<!-- 1. Paint tool -->
     <div id="paint-tool-bar" class="tool-bar">
+
       <input type="color" id="color-picker" name="paint-color" value="#000000">
+
+      <div class="paint-function">
+        <button type="button"><i class="fas fa-brush"></i><p>Brush</p></button>
+        <div>
+          <label for="brush-size">Brush Size:</label>
+          <input name="brush-size" id="slider" type="range" min="0" max="200" value="10" data-highlight="true">
+        </div>
+      </div>
+
+      <div class="paint-function">
+        <button type="button"><i class="fas fa-eraser"></i><p>Eraser</p></button>
+        <div>
+          <label for="eraser-size">Eraser Size:</label>
+          <input name="eraser-size" id="slider" type="range" min="0" max="200" value="10" data-highlight="true">
+        </div>
+      </div>
     </div>
+
+<!-- 2. Adjustment tool -->
+    <div id="adjustment-tool-bar" class="tool-bar">
+    </div>
+
+<!-- 3. Crop tool -->
+
+<!-- 4. Save Modal -->
+<!-- 5. Delete Modal -->
 
   </body>
 </html>

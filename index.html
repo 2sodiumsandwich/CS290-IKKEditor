@@ -11,16 +11,17 @@
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.15.3/css/all.css" crossorigin="anonymous">
 
     <link rel="stylesheet" href="style.css" media="screen">
+
   </head>
 
   <body>
 
     <header>
-      <a href="#"><h1 class="site-title"><i class="fas fa-image"></i>IKKEditor</h1></a>
+      <a href="index.html"><h1 class="site-title"><i class="fas fa-image"></i>IKKEditor</h1></a>
       <nav class="menubar">
         <ul class="menulist">
-          <li class="menuitem menulink active"><a href="#">Home</a></li>
-          <li class="menuitem menulink"><a href="#">Gallery</a></li>
+          <li class="menuitem menulink active"><a href="index.html">Home</a></li>
+          <li class="menuitem menulink"><a href="gallery.html">Gallery</a></li>
         </ul>
       </nav>
     </header>
@@ -30,7 +31,7 @@
     <main class="menu-button-container">
       <article class="menu-button">
         <button type="button"><i class="fas fa-paint-brush"></i><p>Paint</p></button>
-        <button type="button"><i class="fas fa-adjust"></i><p>Adjustment</p></button>
+        <button type="button"><i class="fas fa-sliders-h"></i><p>Adjustment</p></button>
         <button type="button"><i class="fas fa-crop-alt"></i><p>Crop</p></button>
         <button type="button"><i class="far fa-save"></i><p>Save</p></button>
         <button type="button"><i class="far fa-trash-alt"></i><p>Delete</p></button>
@@ -50,8 +51,8 @@
       <div class="paint-function">
         <button type="button"><i class="fas fa-brush"></i><p>Brush</p></button>
         <div>
-          <label for="brush-size">Brush Size:</label>
-          <input name="brush-size" id="slider" type="range" min="0" max="200" value="10" data-highlight="true">
+          <label for="brush-size">Brush Size</label>
+          <input name="brush-size" id="slider-fill" type="range" min="0" max="200" value="10" data-highlight="true">
         </div>
       </div>
 
@@ -59,19 +60,80 @@
         <button type="button"><i class="fas fa-eraser"></i><p>Eraser</p></button>
         <div>
           <label for="eraser-size">Eraser Size:</label>
-          <input name="eraser-size" id="slider" type="range" min="0" max="200" value="10" data-highlight="true">
+          <input name="eraser-size" id="slider-fill" type="range" min="0" max="200" value="10" data-highlight="true">
         </div>
       </div>
+
     </div>
 
 <!-- 2. Adjustment tool -->
     <div id="adjustment-tool-bar" class="tool-bar">
+
+      <div class="adjust-brightness">
+        <div>
+          <label for="brightness"><i class="fas fa-sun"></i>Brightness:</label>
+          <input name="brightness" id="slider" type="range" min="0" max="100" value="50">
+        </div>
+      </div>
+
+      <div class="adjust-contrast">
+        <div>
+          <label for="contrast"><i class="fas fa-adjust"></i>Contrast:</label>
+          <input name="contrast" id="slider" type="range" min="0" max="100" value="50">
+        </div>
+      </div>
+
     </div>
 
-<!-- 3. Crop tool -->
+<!-- 3. Save Modal -->
+<div id="save-modal" class="hidden">
 
-<!-- 4. Save Modal -->
-<!-- 5. Delete Modal -->
+  <div class="modal-header">
+    <h3>SAVE</h3>
+    <button type="button" class="modal-close-button">&times;</button>
+  </div>
+
+  <div class="modal-body">
+    <div class="photo-input-element">
+      <label for="title-text-input">Title:</label>
+      <textarea id="title-text-input"></textarea>
+    </div>
+
+    <div class="photo-input-element">
+      <label for="name-text-input">User's name:</label>
+      <textarea id="name-text-input"></textarea>
+    </div>
+
+    <div class="photo-input-element">
+      <label for="desc-text-input">Description:</label>
+      <textarea id="desc-text-input"></textarea>
+    </div>
+  </div>
+
+  <div class="modal-footer">
+    <button type="button" class="modal-cancel-button">Cancel</button>
+    <button type="button" class="modal-accept-button">Submit</button>
+  </div>
+
+</div>
+<!-- 4. Delete Modal -->
+<div id="delete-modal" class="hidden">
+
+  <div class="modal-header">
+    <h3>DELETE</h3>
+    <button type="button" class="modal-close-button">&times;</button>
+  </div>
+
+  <div class="modal-body">
+    Are you sure to delete your entire progress?
+  </div>
+
+  <div class="modal-footer">
+    <button type="button" class="modal-cancel-button">Yes</button>
+    <button type="button" class="modal-accept-button">Cancel</button>
+  </div>
+
+</div>
 
   </body>
 </html>

@@ -1,0 +1,292 @@
+* {
+  font-family: 'Roboto', sans-serif;
+  text-decoration: none;
+}
+
+.site-title {
+  font-size: 35px;
+  background-color: #E47D78;
+  padding: 10px 10px 10px 20px;
+  margin: 0px;
+  font-weight: 500;
+  color: white;
+}
+
+.site-title > i:nth-child(1) {
+  margin-right: 12px;
+}
+
+body {
+  margin: 0px;
+  background-color: #EFEFEF;
+}
+
+nav ul li {
+  display:inline;
+  padding:0 10px;
+}
+
+.menulist {
+  float: right;
+}
+
+.menulist li {
+  float: left;
+}
+
+.menu-button {
+  background-color: #E47D78;
+  width: 120px;
+  height: 100px;
+  border-radius: 15px;
+  border: 0px;
+  color: white;
+  cursor: pointer;
+}
+
+.menu-button:hover {
+  background-color: #D96E69;
+}
+
+.menu-button:active {
+  background-color: #D63C3E;
+}
+
+.menu-selected {
+  background-color: #D63C3E;
+}
+
+.tool-selected {
+  background-color: #161515;
+  border: 2px solid white;
+}
+
+.delete-button {
+  background-color: #918787;
+  border-radius: 12px;
+  width: 120px;
+  height: 60px;
+  border: 0px;
+  color: white;
+  cursor: pointer;
+}
+
+.delete-button:hover {
+  background-color: #797171;
+}
+
+.delete-button:active {
+  background-color: #635C5D;
+}
+
+.menu-button-container {
+  display: inline-flex;
+  flex-wrap: wrap;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.tool-bar-header {
+  background-color: #312F2F;
+  font-size: 17px;
+  border-top-left-radius: 12px;
+  border-top-right-radius: 12px;
+  color: #AAAAAA;
+  padding: 5px;
+  margin-bottom: 10px;
+}
+
+.tool-bar-header p {
+  margin: 0px;
+}
+
+.fa-paint-brush {
+  font-size: 35px;
+}
+
+button p {
+  margin: 5px 0px 0px 0px;
+}
+
+.fa-sliders-h {
+  font-size: 35px;
+}
+
+.fa-crop-alt {
+  font-size: 35px;
+}
+
+.fa-save {
+  font-size: 35px;
+}
+
+.fa-trash-alt {
+  font-size: 20px;
+}
+
+.modal-header {
+  background-color: #E47D78;
+  font-size: 20px;
+  font-weight: 600;
+  border-top-left-radius: 15px;
+  border-top-right-radius: 15px;
+  border: 0px;
+}
+
+.modal-header p {
+  color: white;
+  margin: 0px;
+  padding: 5px 0px 5px 0px;
+  text-align: center;
+}
+
+.modal-button {
+  cursor: pointer;
+  color: white;
+  height: 30px;
+  width: 80px;
+  border-radius: 5px;
+  border: none;
+}
+
+.accept {
+  background-color: #E47D78;
+}
+
+.accept:active {
+  background-color: #D63C3E;
+}
+
+.cancel {
+  background-color: #918787;
+}
+
+.cancel:active {
+  background-color: #635C5D;
+}
+
+.modal-close-button {
+  color: white;
+  float: right;
+  font-size: 20px;
+  border: none;
+  background: none;
+  padding: 0;
+  cursor: pointer;
+  margin-right: 10px;
+}
+
+.modal-body {
+  font-size: 17px;
+  margin-top: 15px;
+}
+
+.photo-input-element {
+  margin: 5px 0px 2px 0px;
+}
+
+.modal-footer
+{
+  text-align: center;
+}
+
+#photo-canvas {
+  box-shadow: 1px 1px 5px #919090;
+}
+
+#upload-photo-button {
+  color: #4F4C4C;
+  font-size: 45px;
+  height: 380px;
+  width: 580px;
+  background-color: #AAAAAA;
+  border: 5px solid #4F4C4C;
+  border-radius: 15px;
+  cursor: pointer;
+}
+
+#upload-photo-button > p:nth-child(2) {
+  margin: 0px;
+}
+
+#upload-photo-button > i:nth-child(1) {
+  font-size: 150px;
+}
+
+#upload-photo-button:hover {
+  background-color: #919090;
+}
+
+#upload-photo-button:active {
+  background-color: #4F4C4C;
+  color: #AAAAAA;
+}
+
+#paint-tool-bar {
+  background-color: #4F4C4C;
+  height: 350px;
+  width: 200px;
+  border-radius: 12px;
+  color: #FAF7F7;
+  text-align: center;
+}
+
+#paint-tool-bar button {
+  background-color: #312F2F;
+  height: 70px;
+  width: 70px;
+  border-radius: 45px;
+  border: 0px;
+  color: #FAF7F7;
+  cursor: pointer;
+  margin-bottom: 5px;
+}
+
+#paint-tool-bar button:hover {
+  background-color: #232222;
+}
+
+#color-picker {
+  background-color: #312F2F;
+  padding: 5px;
+  height: 40px;
+  width: 70px;
+  border-radius: 5px;
+  border: 0px;
+  margin-bottom: 10px;
+  margin-top: 5px;
+}
+
+#adjustment-tool-bar {
+  background-color: #4F4C4C;
+  height: 200px;
+  width: 200px;
+  border-radius: 12px;
+  color: #FAF7F7;
+  text-align: center;
+}
+
+#slider {
+  margin: 5px 0px 5px 0px;
+}
+
+#save-modal {
+  background-color: white;
+  height: 300px;
+  width: 450px;
+  border-radius: 15px;
+  box-shadow: 1px 1px 5px #919090;
+}
+
+#delete-modal {
+  text-align: center;
+  background-color: white;
+  height: 150px;
+  width: 450px;
+  border-radius: 15px;
+  box-shadow: 1px 1px 5px #919090;
+}
+#delete-modal > div:nth-child(2) {
+  font-size: 18px;
+  margin-bottom: 15px;
+}

@@ -29,23 +29,26 @@
     <button type="button" id="upload-photo-button"><i class="far fa-image"></i><p>Upload your photos</p></button>
 
     <main class="menu-button-container">
-      <article class="menu-button">
-        <button type="button"><i class="fas fa-paint-brush"></i><p>Paint</p></button>
-        <button type="button"><i class="fas fa-sliders-h"></i><p>Adjustment</p></button>
-        <button type="button"><i class="fas fa-crop-alt"></i><p>Crop</p></button>
-        <button type="button"><i class="far fa-save"></i><p>Save</p></button>
-        <button type="button"><i class="far fa-trash-alt"></i><p>Delete</p></button>
+      <article>
+        <button type="button" class="menu-button"><i class="fas fa-paint-brush"></i><p>Paint</p></button>
+        <button type="button" class="menu-button"><i class="fas fa-sliders-h"></i><p>Adjustment</p></button>
+        <button type="button" class="menu-button"><i class="fas fa-crop-alt"></i><p>Crop</p></button>
+        <button type="button" class="menu-button"><i class="far fa-save"></i><p>Save</p></button>
+        <button type="button" class="delete-button"><i class="far fa-trash-alt"></i><p>Delete</p></button>
       </article>
     </main>
 
 <!-- The sections below are about the functions of each menu -->
-    <canvas id="photo-canvas" width="500" height="500">
+    <canvas id="photo-canvas" width="960" height="540">
       <!-- This field is for the user's photo. Need javascript. -->
     </canvas>
 
 <!-- 1. Paint tool -->
     <div id="paint-tool-bar" class="tool-bar">
 
+      <div class="tool-bar-header">
+        <p>Paint Tool</p>
+      </div>
       <input type="color" id="color-picker" name="paint-color" value="#000000">
 
       <div class="paint-function">
@@ -59,7 +62,7 @@
       <div class="paint-function">
         <button type="button"><i class="fas fa-eraser"></i><p>Eraser</p></button>
         <div>
-          <label for="eraser-size">Eraser Size:</label>
+          <label for="eraser-size">Eraser Size</label>
           <input name="eraser-size" id="slider-fill" type="range" min="0" max="200" value="10" data-highlight="true">
         </div>
       </div>
@@ -69,16 +72,26 @@
 <!-- 2. Adjustment tool -->
     <div id="adjustment-tool-bar" class="tool-bar">
 
+      <div class="tool-bar-header">
+        <p>Adjustment Tool</p>
+      </div>
       <div class="adjust-brightness">
         <div>
-          <label for="brightness"><i class="fas fa-sun"></i>Brightness:</label>
+          <label for="brightness"><i class="fas fa-sun"></i> Brightness</label>
           <input name="brightness" id="slider" type="range" min="0" max="100" value="50">
         </div>
       </div>
 
       <div class="adjust-contrast">
         <div>
-          <label for="contrast"><i class="fas fa-adjust"></i>Contrast:</label>
+          <label for="contrast"><i class="fas fa-adjust"></i> Contrast</label>
+          <input name="contrast" id="slider" type="range" min="0" max="100" value="50">
+        </div>
+      </div>
+
+      <div class="adjust-saturation">
+        <div>
+          <label for="contrast"><i class="fas fa-tint"></i> Saturation</label>
           <input name="contrast" id="slider" type="range" min="0" max="100" value="50">
         </div>
       </div>
@@ -89,8 +102,7 @@
 <div id="save-modal" class="hidden">
 
   <div class="modal-header">
-    <h3>SAVE</h3>
-    <button type="button" class="modal-close-button">&times;</button>
+    <p>SAVE<button type="button" class="modal-close-button">&times;</button></p>
   </div>
 
   <div class="modal-body">
@@ -111,8 +123,8 @@
   </div>
 
   <div class="modal-footer">
-    <button type="button" class="modal-cancel-button">Cancel</button>
-    <button type="button" class="modal-accept-button">Submit</button>
+    <button type="button" class="modal-button accept">Submit</button>
+    <button type="button" class="modal-button cancel">Cancel</button>
   </div>
 
 </div>
@@ -120,8 +132,7 @@
 <div id="delete-modal" class="hidden">
 
   <div class="modal-header">
-    <h3>DELETE</h3>
-    <button type="button" class="modal-close-button">&times;</button>
+    <p>DELETE<button type="button" class="modal-close-button">&times;</button></p>
   </div>
 
   <div class="modal-body">
@@ -129,8 +140,8 @@
   </div>
 
   <div class="modal-footer">
-    <button type="button" class="modal-cancel-button">Yes</button>
-    <button type="button" class="modal-accept-button">Cancel</button>
+    <button type="button" class="modal-button accept">Yes</button>
+    <button type="button" class="modal-button cancel">Cancel</button>
   </div>
 
 </div>

@@ -12,6 +12,12 @@
   color: white;
 }
 
+a:visited, a:hover, a:link {
+  font-size: 20px;
+  font-weight: 600;
+  color: white;
+}
+
 .site-title > i:nth-child(1) {
   margin-right: 12px;
 }
@@ -24,10 +30,23 @@ body {
 nav ul li {
   display:inline;
   padding:0 10px;
+  margin-right: 15px;
 }
 
 .menulist {
-  float: right;
+  color: white;
+  position: fixed;
+  margin: 0px;
+  top: 16px;
+  right: 1%;
+}
+
+.menuitem {
+  padding-bottom: 8px;
+}
+
+.active {
+  box-shadow: inset 0 -3px white;
 }
 
 .menulist li {
@@ -80,10 +99,18 @@ nav ul li {
 }
 
 .menu-button-container {
-  display: inline-flex;
+  display: flex;
   flex-wrap: wrap;
   flex-direction: column;
   justify-content: center;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  margin: -220px 0px 0px 550px;
+}
+
+.menu-button-container button {
+  margin: 2px 0px 2px 0px;
 }
 
 .tool-bar-header {
@@ -157,6 +184,50 @@ button p {
   background-color: #D63C3E;
 }
 
+.upload-button-container
+{
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  margin: -180px 0px 0px -300px;
+  text-align: center;
+  color: #4F4C4C;
+  font-size: 35px;
+  height: 380px;
+  width: 580px;
+  background-color: #AAAAAA;
+  border: 5px solid #4F4C4C;
+  border-radius: 15px;
+  cursor: pointer;
+}
+
+.upload-button-container label {
+  display: inline-block;
+  height: 380px;
+  width: 580px;
+  cursor: pointer;
+}
+
+.upload-button-container p {
+  margin: 0px;
+}
+
+.upload-button-container > label:nth-child(2) > i:nth-child(1) {
+  font-size: 150px;
+  margin-top: 85px;
+}
+
+.upload-button-container:hover
+{
+  background-color: #919090;
+}
+
+.upload-button-container:active
+{
+  background-color: #4F4C4C;
+  color: #AAAAAA;
+}
+
 .cancel {
   background-color: #918787;
 }
@@ -182,47 +253,37 @@ button p {
 }
 
 .photo-input-element {
-  margin: 5px 0px 2px 0px;
+  margin: 5px 0px 5px 0px;
+}
+
+.photo-input-element textarea {
+  resize: none;
+  width: 400px;
 }
 
 .modal-footer
 {
   text-align: center;
+  margin-top: 15px;
+}
+
+.hidden {
+  display: none;
 }
 
 #photo-canvas {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  margin: -250px 0px 0px -480px;
   box-shadow: 1px 1px 5px #919090;
 }
 
-#upload-photo-button {
-  color: #4F4C4C;
-  font-size: 45px;
-  height: 380px;
-  width: 580px;
-  background-color: #AAAAAA;
-  border: 5px solid #4F4C4C;
-  border-radius: 15px;
-  cursor: pointer;
-}
-
-#upload-photo-button > p:nth-child(2) {
-  margin: 0px;
-}
-
-#upload-photo-button > i:nth-child(1) {
-  font-size: 150px;
-}
-
-#upload-photo-button:hover {
-  background-color: #919090;
-}
-
-#upload-photo-button:active {
-  background-color: #4F4C4C;
-  color: #AAAAAA;
-}
-
 #paint-tool-bar {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  margin: -150px 0px 0px -730px;
   background-color: #4F4C4C;
   height: 350px;
   width: 200px;
@@ -258,6 +319,10 @@ button p {
 }
 
 #adjustment-tool-bar {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  margin: -110px 0px 0px -730px;
   background-color: #4F4C4C;
   height: 200px;
   width: 200px;
@@ -270,7 +335,15 @@ button p {
   margin: 5px 0px 5px 0px;
 }
 
+#slider-fill {
+
+}
+
 #save-modal {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  margin: -150px 0px 0px -220px;
   background-color: white;
   height: 300px;
   width: 450px;
@@ -278,15 +351,38 @@ button p {
   box-shadow: 1px 1px 5px #919090;
 }
 
+#save-modal .modal-body {
+  margin-left: 15px;
+}
+
+#title-text-input, #name-text-input {
+  height: 20px;
+}
+
 #delete-modal {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  margin: -70px 0px 0px -220px;
   text-align: center;
   background-color: white;
-  height: 150px;
+  height: 130px;
   width: 450px;
   border-radius: 15px;
   box-shadow: 1px 1px 5px #919090;
 }
+
 #delete-modal > div:nth-child(2) {
   font-size: 18px;
   margin-bottom: 15px;
+}
+
+#modal-backdrop {
+  position: fixed;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  z-index: 1000;
+  background-color: rgba(0, 0, 0, 0.45);
 }

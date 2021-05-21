@@ -26,10 +26,13 @@
       </nav>
     </header>
 
-    <button type="button" id="upload-photo-button"><i class="far fa-image"></i><p>Upload your photos</p></button>
+    <div class="upload-button-container">
+      <input type="file" id="upload-photo-button" hidden/>
+      <label for="upload-photo-button"><i class="far fa-image"></i><p>Choose file</p></label>
+    </div>
 
-    <main class="menu-button-container">
-      <article>
+    <main>
+      <article class="menu-button-container">
         <button type="button" class="menu-button"><i class="fas fa-paint-brush"></i><p>Paint</p></button>
         <button type="button" class="menu-button"><i class="fas fa-sliders-h"></i><p>Adjustment</p></button>
         <button type="button" class="menu-button"><i class="fas fa-crop-alt"></i><p>Crop</p></button>
@@ -38,6 +41,7 @@
       </article>
     </main>
 
+    <!-- <div id="modal-backdrop" class="hidden"></div> -->
 <!-- The sections below are about the functions of each menu -->
     <canvas id="photo-canvas" width="960" height="540">
       <!-- This field is for the user's photo. Need javascript. -->
@@ -55,7 +59,7 @@
         <button type="button"><i class="fas fa-brush"></i><p>Brush</p></button>
         <div>
           <label for="brush-size">Brush Size</label>
-          <input name="brush-size" id="slider-fill" type="range" min="0" max="200" value="10" data-highlight="true">
+          <input name="brush-size" id="slider-fill" type="range" min="0" max="200" value="10" step="1" data-highlight="true">
         </div>
       </div>
 
@@ -63,7 +67,7 @@
         <button type="button"><i class="fas fa-eraser"></i><p>Eraser</p></button>
         <div>
           <label for="eraser-size">Eraser Size</label>
-          <input name="eraser-size" id="slider-fill" type="range" min="0" max="200" value="10" data-highlight="true">
+          <input name="eraser-size" id="slider-fill" type="range" min="0" max="200" value="10" step="1" data-highlight="true">
         </div>
       </div>
 
@@ -78,28 +82,28 @@
       <div class="adjust-brightness">
         <div>
           <label for="brightness"><i class="fas fa-sun"></i> Brightness</label>
-          <input name="brightness" id="slider" type="range" min="0" max="100" value="50">
+          <input name="brightness" id="slider" type="range" min="0" max="100" value="50" step="1">
         </div>
       </div>
 
       <div class="adjust-contrast">
         <div>
           <label for="contrast"><i class="fas fa-adjust"></i> Contrast</label>
-          <input name="contrast" id="slider" type="range" min="0" max="100" value="50">
+          <input name="contrast" id="slider" type="range" min="0" max="100" value="50" step="1">
         </div>
       </div>
 
       <div class="adjust-saturation">
         <div>
           <label for="contrast"><i class="fas fa-tint"></i> Saturation</label>
-          <input name="contrast" id="slider" type="range" min="0" max="100" value="50">
+          <input name="contrast" id="slider" type="range" min="0" max="100" value="50" step="1">
         </div>
       </div>
 
     </div>
 
 <!-- 3. Save Modal -->
-<div id="save-modal" class="hidden">
+<div id="save-modal">
 
   <div class="modal-header">
     <p>SAVE<button type="button" class="modal-close-button">&times;</button></p>
@@ -129,7 +133,7 @@
 
 </div>
 <!-- 4. Delete Modal -->
-<div id="delete-modal" class="hidden">
+<div id="delete-modal">
 
   <div class="modal-header">
     <p>DELETE<button type="button" class="modal-close-button">&times;</button></p>

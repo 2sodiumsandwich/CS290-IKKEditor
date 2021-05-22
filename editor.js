@@ -13,8 +13,87 @@ var ctx = canvas.getContext('2d');
 var imageWidth, imageHeight, canX, canY;
 var active = false;
 
-
 var imageData;
+
+// NEW CODEEEEEEEEEEE
+console.log("Paint")
+//NEW PAINT CODE
+
+var paintToggle = document.getElementById("paint-toggle");
+console.log("PaintToggle", paintToggle)
+paintToggle.addEventListener("click", paint_Toggle, false);
+let paint = false;
+console.log("help")
+let draw_color = "black";
+let draw_width = "10";
+let erase_width = "10";
+let is_drawing = false;
+let is_erasing = false;
+
+function paint_Toggle(){
+    if (paint == true){
+        paint = false;
+    }else if (paint == false){
+        paint = true;
+    }
+}
+
+
+canvas.addEventListener("touchstart", start, false);
+canvas.addEventListener("touchmove", drawFunc, false);
+canvas.addEventListener("mousedown", start, false);
+canvas.addEventListener("mousemove", drawFunc, false);
+
+canvas.addEventListener("touchend", stop, false);
+canvas.addEventListener("mouseup", stop, false);
+canvas.addEventListener("mouseout", stop, false);
+
+function start(event){
+    is_drawing = true;
+    ctx.beginPath();
+    ctx.moveTo(event.clientX - canvas.offsetLeft, event.clientY - canvas.offsetTop);
+    event.preventDefault();
+}
+
+function drawFunc(event){
+    if (is_drawing && is_erasing && paint){
+        ctx.clearRect(event.clientX - canvas.offsetLeft, event.clientY - canvas.offsetTop, erase_width, erase_width)
+    }else if (is_drawing && paint) {
+        console.log("Drawing")
+        ctx.lineTo(event.clientX - canvas.offsetLeft, event.clientY - canvas.offsetTop);
+        ctx.strokeStyle = draw_color;
+        ctx.lineWidth = draw_width;
+        ctx.lineCap = "round";
+        ctx.lineJoin = "round";
+        ctx.stroke();
+    }
+    event.preventDefault();
+}
+
+function stop(event){
+    if ( is_drawing ) {
+        ctx.stroke()
+        ctx.closePath()
+        is_drawing = false;
+    }
+    event.preventDefault();
+}
+
+function erase_tool(){
+    if (is_erasing == true){
+    is_erasing = false;
+    }else if (is_erasing == false){
+        is_erasing = true;
+    }
+}
+
+function paint_tool(){
+    if (is_erasing == true){
+        is_erasing = false;
+    }
+}
+
+//NEW CODE//
 
 //default values on page load
 var brightness = 0, contrast = 0, saturation = 1;

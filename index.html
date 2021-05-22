@@ -58,21 +58,26 @@
       <div class="tool-bar-header">
         <p>Paint Tool</p>
       </div>
-      <input type="color" id="color-picker" name="paint-color" value="#000000">
+      <input onInput="draw_color = this.value" type="color" id="color-picker" name="paint-color" value="#000000">
 
       <div class="paint-function">
-        <button type="button"><i class="fas fa-brush"></i><p>Brush</p></button>
+        <button onClick="paint_tool()" type="button"><i class="fas fa-brush"></i><p>Brush</p></button>
         <div>
           <label for="brush-size">Brush Size</label>
-          <input name="brush-size" id="slider-fill" type="range" min="0" max="200" value="10" step="1" data-highlight="true">
+          
+          <input name="brush-size" id="slider-fill" 
+          type="range" min="0" max="200" value="10" step="1" data-highlight="true" onInput="draw_width = this.value">
+
         </div>
       </div>
 
       <div class="paint-function">
-        <button type="button"><i class="fas fa-eraser"></i><p>Eraser</p></button>
+        <button onClick="erase_tool()" type="button"><i class="fas fa-eraser"></i><p>Eraser</p></button>
         <div>
           <label for="eraser-size">Eraser Size</label>
-          <input name="eraser-size" id="slider-fill" type="range" min="0" max="200" value="10" step="1" data-highlight="true">
+
+          <input name="eraser-size" id="slider-fill" type="range" min="0" max="200" value="10" step="1" data-highlight="true" onInput="erase_width = this.value">
+
         </div>
       </div>
 

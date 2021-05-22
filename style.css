@@ -258,13 +258,68 @@ button p {
 
 .photo-input-element textarea {
   resize: none;
-  width: 400px;
+  width: 415px;
 }
 
 .modal-footer
 {
   text-align: center;
   margin-top: 15px;
+}
+
+.error-container {
+  margin-top: 50px;
+  text-align: center;
+  color: #4F4C4C;
+}
+
+.error-container p{
+  font-size: 100px;
+  margin: 0;
+}
+
+.error-container h2 {
+  margin: 10px 0;
+  font-size: 96px;
+  font-weight: 400;
+}
+
+.error-container h3 {
+  margin-top: 10px 0;
+  font-size: 36px;
+  font-weight: 600;
+}
+
+.photo-container {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+
+.image-button {
+  height: 200px;
+  width: 200px;
+  margin: 8px;
+  background-image: url("hamster.png");
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: cover;
+  border: none;
+  box-shadow: 1px 1px 5px #919090;
+  border-radius: 8px;
+  cursor: pointer;
+}
+
+.image-button:hover {
+  border: 5px solid #E47D78;
+}
+
+.image-button:active {
+  border: 5px solid #FF4848;
+}
+
+.desc-contents {
+  font-weight: 600;
 }
 
 .hidden {
@@ -349,6 +404,7 @@ button p {
   width: 450px;
   border-radius: 15px;
   box-shadow: 1px 1px 5px #919090;
+  z-index: 1010;
 }
 
 #save-modal .modal-body {
@@ -370,6 +426,7 @@ button p {
   width: 450px;
   border-radius: 15px;
   box-shadow: 1px 1px 5px #919090;
+  z-index: 1010;
 }
 
 #delete-modal > div:nth-child(2) {
@@ -384,5 +441,36 @@ button p {
   left: 0;
   right: 0;
   z-index: 1000;
-  background-color: rgba(0, 0, 0, 0.45);
+  background-color: rgba(255, 255, 255, 0.55);
+}
+
+#show-up {
+  position: absolute;
+  top: 5%;
+  left: 5%;
+}
+
+#show-up-wrapper {
+  display: flex;
+  justify-content: center;
+}
+
+#show-up-photo {
+  z-index: 1010;
+}
+
+#description-modal {
+  text-overflow: ellipsis;
+  margin-top: 2%;
+  margin-left: 10px;
+  background-color: white;
+  z-index: 1010;
+  border-radius: 15px;
+  box-shadow: 1px 1px 5px #919090;
+  width: 350px;
+  height: 350px;
+}
+
+#description-modal .modal-body p {
+  margin: 0px 8px 8px 8px;
 }

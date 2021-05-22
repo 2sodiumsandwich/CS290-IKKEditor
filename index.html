@@ -26,29 +26,34 @@
       </nav>
     </header>
 
-    <div class="upload-button-container">
-      <input type="file" id="upload-photo-button" hidden/>
-      <label for="upload-photo-button"><i class="far fa-image"></i><p>Choose file</p></label>
-    </div>
-
+ 
     <main>
       <article class="menu-button-container">
-        <button type="button" class="menu-button"><i class="fas fa-paint-brush"></i><p>Paint</p></button>
-        <button type="button" class="menu-button"><i class="fas fa-sliders-h"></i><p>Adjustment</p></button>
-        <button type="button" class="menu-button"><i class="fas fa-crop-alt"></i><p>Crop</p></button>
-        <button type="button" class="menu-button"><i class="far fa-save"></i><p>Save</p></button>
+        <button type="button" id="paint-toggle" class="menu-button"><i class="fas fa-paint-brush"></i><p>Paint</p></button>
+        <button type="button" id="adjustment-toggle" class="menu-button"><i class="fas fa-sliders-h"></i><p>Adjustment</p></button>
+        <button type="button" id="crop-toggle" class="menu-button"><i class="fas fa-crop-alt"></i><p>Crop</p></button>
+        <button type="button" id="save-button" class="menu-button"><i class="far fa-save"></i><p>Save</p></button>
         <button type="button" class="delete-button"><i class="far fa-trash-alt"></i><p>Delete</p></button>
       </article>
     </main>
 
     <!-- <div id="modal-backdrop" class="hidden"></div> -->
 <!-- The sections below are about the functions of each menu -->
-    <canvas id="photo-canvas" width="960" height="540">
-      <!-- This field is for the user's photo. Need javascript. -->
-    </canvas>
+    <div>
+      <canvas id="photo-canvas" width="960" height="540">
+        <!-- This field is for the user's photo. Need javascript. -->
+      </canvas>
+    </div>
+
+    <button class="upload-button-container">
+      <input type="file" accept="image/*" id="upload-photo-button" hidden/>
+      <label for="upload-photo-button"><i class="far fa-image"></i><p>Choose file</p></label>
+    </button>
+
+    
 
 <!-- 1. Paint tool -->
-    <div id="paint-tool-bar" class="tool-bar">
+    <div id="paint-tool-bar" class="tool-bar" hidden>
 
       <div class="tool-bar-header">
         <p>Paint Tool</p>
@@ -74,7 +79,7 @@
     </div>
 
 <!-- 2. Adjustment tool -->
-    <div id="adjustment-tool-bar" class="tool-bar">
+    <div id="adjustment-tool-bar" class="tool-bar" hidden>
 
       <div class="tool-bar-header">
         <p>Adjustment Tool</p>
@@ -82,31 +87,31 @@
       <div class="adjust-brightness">
         <div>
           <label for="brightness"><i class="fas fa-sun"></i> Brightness</label>
-          <input name="brightness" id="slider" type="range" min="0" max="100" value="50" step="1">
+          <input name="brightness" id="brightness-slider" type="range" min="0" max="100" value="50" step="1">
         </div>
       </div>
 
       <div class="adjust-contrast">
         <div>
           <label for="contrast"><i class="fas fa-adjust"></i> Contrast</label>
-          <input name="contrast" id="slider" type="range" min="0" max="100" value="50" step="1">
+          <input name="contrast" id="contrast-slider" type="range" min="0" max="100" value="50" step="1">
         </div>
       </div>
 
       <div class="adjust-saturation">
         <div>
           <label for="contrast"><i class="fas fa-tint"></i> Saturation</label>
-          <input name="contrast" id="slider" type="range" min="0" max="100" value="50" step="1">
+          <input name="contrast" id="saturation-slider" type="range" min="0" max="100" value="50" step="1">
         </div>
       </div>
 
     </div>
 
 <!-- 3. Save Modal -->
-<div id="save-modal">
+<div id="save-modal" hidden>
 
   <div class="modal-header">
-    <p>SAVE<button type="button" class="modal-close-button">&times;</button></p>
+    <p>SAVE<button type="button" class="modal-close-button save-modal-close">&times;</button></p>
   </div>
 
   <div class="modal-body">
@@ -127,16 +132,16 @@
   </div>
 
   <div class="modal-footer">
-    <button type="button" class="modal-button accept">Submit</button>
-    <button type="button" class="modal-button cancel">Cancel</button>
+    <button type="button" id="save-button-accept" class="modal-button accept">Submit</button>
+    <button type="button" class="modal-button cancel save-modal-close">Cancel</button>
   </div>
 
 </div>
 <!-- 4. Delete Modal -->
-<div id="delete-modal">
+<div id="delete-modal" hidden>
 
   <div class="modal-header">
-    <p>DELETE<button type="button" class="modal-close-button">&times;</button></p>
+    <p>DELETE<button type="button" class="modal-close-button delete-button-close">&times;</button></p>
   </div>
 
   <div class="modal-body">
@@ -144,11 +149,15 @@
   </div>
 
   <div class="modal-footer">
-    <button type="button" class="modal-button accept">Yes</button>
-    <button type="button" class="modal-button cancel">Cancel</button>
+    <button type="button" id="delete-button-accept" class="modal-button accept">Yes</button>
+    <button type="button" class="modal-button cancel delete-button-close">Cancel</button>
   </div>
 
 </div>
+
+<script src="https://code.jquery.com/jquery-3.6.0.js"></script>
+<script src="http://code.jquery.com/ui/jquery-ui-git.js"></script>
+<script src="editor.js"></script>
 
   </body>
 </html>

@@ -98,15 +98,17 @@ function paint_tool(){
 //default values on page load
 var brightness = 0, contrast = 0, saturation = 1;
 
-var sat_slider = document.getElementById("saturation-slider");
-sat_slider.addEventListener("change", layerSaturation, false)
+// var sat_slider = document.getElementById("saturation-slider");
+// sat_slider.addEventListener("change", layerSaturation, false)
 
 
-function layerSaturation() {
+function layerSaturation(pixelArray) {
     // if (pixelArrayvar == undefined){
     //     pixelArrayvar = imageData.data.map((x) => x)
     // }
-    let pixelArray = imageData.data.map((x) => x);
+    
+    // let pixelArray = imageData.data.map((x) => x);
+    // console.log("PixelArray:", pixelArray)
     // console.log("saturation:", saturation1)
     for(i = 0; i < pixelArray.length; i+=4) {
         
@@ -200,10 +202,11 @@ function layerSaturation() {
 }
 
 var pixelArrayvar
-
+var saturation_toggle = false;
 //applies the bcs filters on top of the image woo
 function draw() {
     let pixelArray = imageData.data.map((x) => x);
+    console.log("pixelArray:", pixelArray)
 
     let a = (259*(255 + contrast)) / (255*(259 - contrast)); //gain equation shamelessly stolen from the internet
     for(i = 0; i < pixelArray.length; i+=4) {
@@ -212,8 +215,10 @@ function draw() {
         pixelArray[i+2] = a * (pixelArray[i+2] - 128) + 128 + brightness;
     }
 
-    // setTimeout(layerSaturation(pixelArray), 10)
-    pixelArrayvar = pixelArray
+    if (saturation_toggle == true){
+        layerSaturation(pixelArray)
+    }
+    // pixelArrayvar = pixelArray
 
     let tempImageData = new ImageData(pixelArray, imageWidth, imageHeight);
 
@@ -287,19 +292,36 @@ $(function() {
         $('#adjustment-tool-bar').toggle();
     })
 
+    
+
     $('#brightness-slider').on('input', function (e) {
         brightness = (e.target.value - 50)/50 * 128; //turns 0-100 val into an 8 bit val fo calclatodsnd
+        saturation_toggle = false
+        if(active) draw();
+    })
+
+    $('#brightness-slider').on('change', function (e) {
+        brightness = (e.target.value - 50)/50 * 128; //turns 0-100 val into an 8 bit val fo calclatodsnd
+        saturation_toggle = true
         if(active) draw();
     })
 
     $('#contrast-slider').on('input', function (e) {
         contrast = (e.target.value - 50)/50 * 128; // same as abv
+        saturation_toggle = false;
         if(active) draw();
     })
 
-    $('#saturation-slider').on('input', function (e) {
+    $('#contrast-slider').on('change', function (e) {
+        contrast = (e.target.value - 50)/50 * 128; // same as abv
+        saturation_toggle = true;
+        if(active) draw();
+    })
+
+    $('#saturation-slider').on('change', function (e) {
         saturation = (e.target.value / 50); //sat is on a scale of 0-2, 1 being default
-        // if(active) draw();
+        saturation_toggle = true;
+        if(active) draw();
         console.log("saturation", saturation)
     })
 

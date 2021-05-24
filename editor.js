@@ -98,9 +98,108 @@ function paint_tool(){
 //default values on page load
 var brightness = 0, contrast = 0, saturation = 1;
 
-function layerSaturation(pixelArray) {
-    //no.
+var sat_slider = document.getElementById("saturation-slider");
+sat_slider.addEventListener("change", layerSaturation, false)
+
+
+function layerSaturation() {
+    // if (pixelArrayvar == undefined){
+    //     pixelArrayvar = imageData.data.map((x) => x)
+    // }
+    let pixelArray = imageData.data.map((x) => x);
+    // console.log("saturation:", saturation1)
+    for(i = 0; i < pixelArray.length; i+=4) {
+        
+        var r,g,b,hue,sat,max,min;
+
+        r = pixelArray[i] / 255;
+        g = pixelArray[i+1] / 255;
+        b = pixelArray[i+2] / 255;
+
+        max = Math.max(r, g, b);
+        min = Math.min(r, g, b);
+    
+        if(max - min == 0) {
+            hue = 0;
+        } else if(max == r) {
+            hue = 60 * (0 + (g-b)/(max-min));
+        } else if(max == g) {
+            hue = 60 * (2 + (b-r)/(max-min));
+        } else {
+            hue = 60 * (4 + (r-g)/(max-min));
+        }
+        
+        hue = (hue < 0 ? hue + 360: hue)
+    
+        l = (max + min) / 2
+    
+        sat = (max - l) / Math.min(l, 1-l);
+        sat *= saturation; // this is what we came for
+        sat = (sat > 1 ? 1 : sat < 0 ? 0 : sat);
+        if (l == 0 || l == 1){
+            sat = 0
+        }
+        
+        // console.log("lightness =", l)
+        // console.log("sat =", sat)
+        // console.log("hue =", hue)
+        //back to rgb
+        
+        var hue_prime = hue / 60
+        var contrast2 = (1 - Math.abs(2*l-1)) * sat
+        var x = contrast2 * (1 - Math.abs( hue_prime%2 - 1))
+
+        // console.log("sat: ", sat)
+        // console.log("Hue:", hue)
+        // console.log("hue_prime", hue_prime)
+        var R1, G1, B1;
+        //conditionals for (R1, G1, B1)
+        if(hue_prime == undefined){
+            R1 = 0;
+            G1 = 0;
+            B1 = 0;
+        }else if(hue_prime >= 0 && hue_prime < 1){
+            R1 = contrast2;
+            G1 = x;
+            B1 = 0;
+        }else if(hue_prime >= 1 && hue_prime < 2){
+            R1 = x;
+            G1 = contrast2;
+            B1 = 0;
+        }else if(hue_prime >= 2 && hue_prime < 3){
+            R1 = 0;
+            G1 = contrast2;
+            B1 = x
+        }else if(hue_prime >= 3 && hue_prime < 4){
+            R1 = 0;
+            G1 = x;
+            B1 = contrast2;
+        }else if(hue_prime >= 4 && hue_prime < 5){
+            R1 = x;
+            G1 = 0;
+            B1 = contrast2;
+        }else if(hue_prime >= 5 && hue_prime < 6){
+            R1 = contrast2;
+            G1 = 0;
+            B1 = x;
+        }
+        // console.log("R1:", R1)
+        // console.log("G1", G1)
+        // console.log("B1", B1)
+        var m = l - (contrast2/2)
+
+        pixelArray[i] = (R1 + m)*255
+        pixelArray[i+1] = (G1 + m)*255
+        pixelArray[i+2] = (B1 + m)*255
+
+    }
+    let tempImageData = new ImageData(pixelArray, imageWidth, imageHeight);
+
+    ctx.putImageData(tempImageData, canX, canY);
+    return tempImageData;
 }
+
+var pixelArrayvar
 
 //applies the bcs filters on top of the image woo
 function draw() {
@@ -113,8 +212,8 @@ function draw() {
         pixelArray[i+2] = a * (pixelArray[i+2] - 128) + 128 + brightness;
     }
 
-
-    layerSaturation(pixelArray);
+    // setTimeout(layerSaturation(pixelArray), 10)
+    pixelArrayvar = pixelArray
 
     let tempImageData = new ImageData(pixelArray, imageWidth, imageHeight);
 
@@ -138,11 +237,11 @@ $(function() {
         let fr = new FileReader();
 
         fr.readAsDataURL(imagefile);
-        fr.onloadend = (e) => {
+        fr.onload = (e) => {
             let image = new Image();
             image.src = e.target.result;
             //make sure image is loaded b4 using it
-            image.onloadend = function() {
+            image.onload = function() {
                 try {
                     //Scale image to canvas size, maintaining aspect ratio
                     let ar = image.width / image.height;
@@ -200,7 +299,8 @@ $(function() {
 
     $('#saturation-slider').on('input', function (e) {
         saturation = (e.target.value / 50); //sat is on a scale of 0-2, 1 being default
-        if(active) draw();
+        // if(active) draw();
+        console.log("saturation", saturation)
     })
 
     /**

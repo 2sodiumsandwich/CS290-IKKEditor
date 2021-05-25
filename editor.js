@@ -18,14 +18,13 @@
  var imageData;
  
  // NEW CODEEEEEEEEEEE
- console.log("Paint")
  //NEW PAINT CODE
  
  var paintToggle = document.getElementById("paint-toggle");
  console.log("PaintToggle", paintToggle)
  paintToggle.addEventListener("click", paint_Toggle, false);
+ //default paint values
  let paint = false;
- console.log("help")
  let draw_color = "black";
  let draw_width = "10";
  let erase_width = "10";
@@ -112,13 +111,7 @@
  
  
  function layerSaturation(pixelArray) {
-     // if (pixelArrayvar == undefined){
-     //     pixelArrayvar = imageData.data.map((x) => x)
-     // }
-     
-     // let pixelArray = imageData.data.map((x) => x);
-     // console.log("PixelArray:", pixelArray)
-     // console.log("saturation:", saturation1)
+     // RGB to HSL to RGB, look at documentation 
      for(i = 0; i < pixelArray.length; i+=4) {
          
          var r,g,b,hue,sat,max,min;
@@ -150,19 +143,11 @@
          if (l == 0 || l == 1){
              sat = 0
          }
-         
-         // console.log("lightness =", l)
-         // console.log("sat =", sat)
-         // console.log("hue =", hue)
-         //back to rgb
-         
+     
          var hue_prime = hue / 60
          var contrast2 = (1 - Math.abs(2*l-1)) * sat
          var x = contrast2 * (1 - Math.abs( hue_prime%2 - 1))
  
-         // console.log("sat: ", sat)
-         // console.log("Hue:", hue)
-         // console.log("hue_prime", hue_prime)
          var R1, G1, B1;
          //conditionals for (R1, G1, B1)
          if(hue_prime == undefined){
@@ -194,9 +179,6 @@
              G1 = 0;
              B1 = x;
          }
-         // console.log("R1:", R1)
-         // console.log("G1", G1)
-         // console.log("B1", B1)
          var m = l - (contrast2/2)
  
          pixelArray[i] = (R1 + m)*255
@@ -215,7 +197,6 @@
  //applies the bcs filters on top of the image woo
  function draw() {
      let pixelArray = imageData.data.map((x) => x);
-     console.log("pixelArray:", pixelArray)
  
      let a = (259*(255 + contrast)) / (255*(259 - contrast)); //gain equation shamelessly stolen from the internet
      for(i = 0; i < pixelArray.length; i+=4) {
@@ -223,7 +204,8 @@
          pixelArray[i+1] = a * (pixelArray[i+1] - 128) + 128 + brightness;
          pixelArray[i+2] = a * (pixelArray[i+2] - 128) + 128 + brightness;
      }
- 
+     
+     //Applies once a change is made in any slider
      if (saturation_toggle == true){
          layerSaturation(pixelArray)
      }
@@ -308,19 +290,19 @@
          saturation_toggle = false
          if(active) draw();
      })
-     
-     //The change listeners are here for the sake of making draw more streamline, so saturation only applies once per change and doesn't freeze.
-     $('#brightness-slider').on('change', function (e) {
-         brightness = (e.target.value - 50)/50 * 128; //turns 0-100 val into an 8 bit val fo calclatodsnd
-         saturation_toggle = true
-         if(active) draw();
-     })
  
      $('#contrast-slider').on('input', function (e) {
          contrast = (e.target.value - 50)/50 * 128; // same as abv
          saturation_toggle = false;
          if(active) draw();
      })
+
+     //The change listeners are here for the sake of making draw more streamline, so saturation only applies once per change and doesn't freeze.
+     $('#brightness-slider').on('change', function (e) {
+        brightness = (e.target.value - 50)/50 * 128; //turns 0-100 val into an 8 bit val fo calclatodsnd
+        saturation_toggle = true
+        if(active) draw();
+    })
  
      $('#contrast-slider').on('change', function (e) {
          contrast = (e.target.value - 50)/50 * 128; // same as abv
@@ -363,8 +345,6 @@
          $(".upload-button-container").show();
          active = false;
      })
-     
-     import mergeImages from 'merge-images';
 
      $('#save-button-accept').click(() => {
          //temporary scuffed as hell image saving
@@ -384,7 +364,7 @@
          let tempCtx1 = tempCanvas1.getContext('2d');
          tempCtx1.putImageData(draw(), 0, 0);
          let tempCtx2 = tempCanvas2.getContext('2d');
-         tempCtx2.putImageData(drawing_ctx.getImageData(0, 0, canvas.width, canvas.height), 0, 0);
+         tempCtx2.putImageData(drawing_ctx.getImageData(canX, canY, canvas.width, canvas.height), 0, 0);
 
  
          //dataURL is the image
@@ -400,44 +380,28 @@
          var imageObj2 = new Image();
 
          let tempCanvas3 = document.createElement('canvas');
-         tempCanvas3.width = imageWidth;
-         tempCanvas3.height = imageHeight;
+         tempCanvas3.width = canvas.width;
+         tempCanvas3.height = canvas.height;
          let tempCtx3 = tempCanvas3.getContext('2d')
+         var final_image;
 
+         console.log("dataURL:", dataURL1)
          imageObj1.src = dataURL1;
+         //Both images are drawn on a canvas and the final canvas is saved as an image creating the merge effect
          imageObj1.onload = function() {
-            tempCtx3.drawImage(imageObj1, 0, 0, imageWidth, imageHeight);
+            tempCtx3.drawImage(imageObj1, canX, canY, imageWidth, imageHeight);
             imageObj2.src = dataURL2;
-            imageObj2.onload = function(){
-                tempCtx3.drawImage(imageObj2, 0, 0, imageWidth, imageHeight);
+            imageObj2.onload = function () {
+                tempCtx3.drawImage(imageObj2, canX, canY, imageWidth, imageHeight);
+                final_image = tempCanvas3.toDataURL("image/png");
+                
+                let da = document.createElement('a');
+                da.href = final_image
+                da.download = "gaming.png";
+                da.click();
             }
          }
-         
-         
-         console.log("imageObj1 = ", imageObj1)
-
-        // ctx.clearRect(0, 0, canvas.width, canvas.height);
-        // drawing_ctx.clearRect(0, 0, canvas.width, canvas.height);
-         
-         
-        
-         
-         //downloading
-        //  let finalcanvas = document.createElement('canvas');
-        //  finalcanvas.width = imageWidth;
-        //  finalcanvas.height = imageHeight;
-
-        //  let finalctx = finalcanvas.getContext('2d');
-        //  finalctx.putImageData(draw(), 0, 0);
-
-        let final_image = tempCanvas3.toDataURL("image/png");
-
-        console.log("Final Image", final_image)
-        let da = document.createElement('a');
-        da.href = final_image
-        da.download = "gaming.png";
-        da.click();
- 
+    
          $('#save-modal').toggle();
      });  
  });

@@ -67,7 +67,6 @@ function downloadImage(id) {
   xhttp.open("GET", imagedata[id].image, true);
   xhttp.responseType = "blob";
   xhttp.send();
-
 }
 
 function openImage(id) {

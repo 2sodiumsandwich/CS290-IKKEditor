@@ -340,6 +340,7 @@
      $('#delete-button-accept').click(() => {
          //clear canvas, reset other variables here too
          ctx.clearRect(0, 0, canvas.width, canvas.height);
+         drawing_ctx.clearRect(0, 0, canvas.width, canvas.height);
          reset();
          $('#delete-modal').toggle();
          $(".upload-button-container").show();

@@ -1,17 +1,23 @@
 <!DOCTYPE html>
 <html>
   <head>
+    <!-- The core Firebase JS SDK is always required and must be listed first -->
+    <script src="https://www.gstatic.com/firebasejs/8.6.2/firebase-app.js"></script> 
+    <script src="https://www.gstatic.com/firebasejs/8.6.2/firebase-firestore.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.6.2/firebase-storage.js"></script>
 
     <meta charset="utf-8">
     <title>IKKEditor</title>
 
     <!-- Fontfamily -->
     <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@100;400&display=swap" rel="stylesheet">
+
     <!-- Icon -->
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.15.3/css/all.css" crossorigin="anonymous">
 
     <link rel="stylesheet" href="style.css" media="screen">
 
+    <script src="gallery.js" charset="utf-8" defer></script>
   </head>
 
   <body>
@@ -29,27 +35,11 @@
     <main class="photo-container">
 
       <article class="edited-photo">
-        <button type="button" class="image-button"></button>
+        <img type="button" onclick="openImage(this.id)" class="image-button"></img>
       </article>
 
       <article class="edited-photo">
-        <button type="button" class="image-button"></button>
-      </article>
-
-      <article class="edited-photo">
-        <button type="button" class="image-button"></button>
-      </article>
-
-      <article class="edited-photo">
-        <button type="button" class="image-button"></button>
-      </article>
-
-      <article class="edited-photo">
-        <button type="button" class="image-button"></button>
-      </article>
-
-      <article class="edited-photo">
-        <button type="button" class="image-button"></button>
+        <img type="button" onclick="openImage(this.id)" class="image-button"></img>
       </article>
 
     </main>
@@ -59,33 +49,33 @@
     <div id="show-up">
       <div id="show-up-wrapper">
         <div id="show-up-photo">
-          <img src="./hamster.png">
+          <img id="image">
         </div>
 
         <div id="description-modal">
           <div class="modal-header">
-            <p>DESCRIPTION<button type="button" class="modal-close-button">&times;</button></p>
+            <p>DESCRIPTION<button type="button" onclick="closeModal()" class="modal-close-button">&times;</button></p>
           </div>
 
           <div class="modal-body">
             <div class="photo-input-element">
               <p class="desc-contents">[Title]</p>
-              <p>This is a title</p>
+              <p id="title">This is a title</p>
             </div>
 
             <div class="photo-input-element">
               <p class="desc-contents">[User name]</p>
-              <p>This is an user name</p>
+              <p id="author">This is an user name</p>
             </div>
 
             <div class="photo-input-element">
               <p class="desc-contents">[Description]</p>
-              <p>This is a description</p>
+              <p id="description">This is a description</p>
             </div>
 
             <div class="modal-footer">
-              <button type="button" class="modal-button accept">Download</button>
-              <button type="button" class="modal-button cancel">Close</button>
+              <button type="button" onclick="downloadImage(this.id)" class="modal-button accept">Download</button>
+              <button type="button" onclick="closeModal()" class="modal-button cancel">Close</button>
             </div>
           </div>
         </div>

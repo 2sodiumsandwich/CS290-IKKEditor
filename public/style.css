@@ -300,7 +300,6 @@ button p {
   height: 200px;
   width: 200px;
   margin: 8px;
-  background-image: url("hamster.png");
   background-repeat: no-repeat;
   background-position: center;
   background-size: cover;
@@ -442,12 +441,14 @@ button p {
   right: 0;
   z-index: 1000;
   background-color: rgba(255, 255, 255, 0.55);
+  display: none;
 }
 
 #show-up {
   position: absolute;
   top: 5%;
   left: 5%;
+  display: none;
 }
 
 #show-up-wrapper {

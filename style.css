@@ -155,6 +155,43 @@ button p {
   font-size: 20px;
 }
 
+.stickers-container {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  margin: -200px 0px 0px -730px;
+  background-color: #4F4C4C;
+  height: auto;
+  width: 200px;
+  border-radius: 12px;
+  color: #FAF7F7;
+  text-align: center;
+}
+
+.sticker-button {
+  background: none;
+  border: 2px solid white;
+  border-radius: 2px;
+  margin: 10px 5px 10px 5px;
+  width: 80px;
+  height: 80px;
+  cursor: pointer;
+}
+
+.sticker-button:hover {
+  background: grey;
+}
+
+.sticker-button:active {
+  background: #E47D78;
+}
+
+.sticker-button img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+}
+
 .modal-header {
   background-color: #E47D78;
   font-size: 20px;

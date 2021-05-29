@@ -89,7 +89,7 @@
 
     </div>
 
-<!-- 2. Adjustment tool -->
+  <!-- 2. Adjustment tool -->
     <div id="adjustment-tool-bar" class="tool-bar" hidden>
 
       <div class="tool-bar-header">
@@ -118,63 +118,82 @@
 
     </div>
 
-<!-- 3. Save Modal -->
-<div id="save-modal" hidden>
+    <!-- 3. Decoration tool -->
+    <div id="decoration-tool-bar" class="tool-bar" hidden>
 
-  <div class="modal-header">
-    <p>SAVE<button type="button" class="modal-close-button save-modal-close">&times;</button></p>
-  </div>
-
-  <div class="modal-body">
-    <div class="photo-input-element">
-      <label for="title-text-input">Title:</label>
-      <textarea id="title-text-input"></textarea>
+      <div class="stickers-container">
+        <div class="tool-bar-header">
+          <p>Decorations</p>
+        </div>
+        <button type="button" class="sticker-button"><img src="https://cdn.pixabay.com/photo/2016/03/31/18/20/heart-1294292_960_720.png" alt="Heart"></button>
+        <button type="button" class="sticker-button"><img src="https://cdn.pixabay.com/photo/2016/04/04/22/27/bart-1308411_960_720.png" alt="Bart"></button>
+        <button type="button" class="sticker-button"><img src="https://cdn.pixabay.com/photo/2014/04/03/11/38/sunglasses-312051_960_720.png" alt="Glasses"></button>
+        <button type="button" class="sticker-button"><img src="https://cdn.pixabay.com/photo/2016/01/20/17/19/flower-1151970_960_720.png" alt="Flower"></button>
+        <button type="button" class="sticker-button"><img src="https://cdn.pixabay.com/photo/2019/07/12/00/09/wreath-4331664_960_720.png" alt="Wreath"></button>
+        <button type="button" class="sticker-button"><img src="https://cdn.pixabay.com/photo/2017/01/31/13/16/flora-2023951_960_720.png" alt="Flora"></button>
+        <button type="button" class="sticker-button"><img src="https://cdn.pixabay.com/photo/2020/01/12/08/14/sunglass-4759505_960_720.png" alt="Heart-sunglasses"></button>
+        <button type="button" class="sticker-button"><img src="https://cdn.pixabay.com/photo/2012/04/18/14/29/heart-37198_960_720.png" alt="Star-heart"></button>
+      </div>
     </div>
 
-    <div class="photo-input-element">
-      <label for="name-text-input">User's name:</label>
-      <textarea id="name-text-input"></textarea>
+    <!-- 4. Save Modal -->
+    <div id="save-modal" hidden>
+
+      <div class="modal-header">
+        <p>SAVE<button type="button" class="modal-close-button save-modal-close">&times;</button></p>
+      </div>
+
+      <div class="modal-body">
+        <div class="photo-input-element">
+          <label for="title-text-input">Title:</label>
+          <textarea id="title-text-input"></textarea>
+        </div>
+
+        <div class="photo-input-element">
+          <label for="name-text-input">User's name:</label>
+          <textarea id="name-text-input"></textarea>
+        </div>
+
+        <div class="photo-input-element">
+          <label for="desc-text-input">Description:</label>
+          <textarea id="desc-text-input"></textarea>
+        </div>
+      </div>
+
+      <div class="modal-footer">
+        <button type="button" id="save-button-accept" class="modal-button accept">Submit</button>
+      <button type="button" class="modal-button cancel save-modal-close">Cancel</button>
     </div>
 
-    <div class="photo-input-element">
-      <label for="desc-text-input">Description:</label>
-      <textarea id="desc-text-input"></textarea>
+  </div>
+
+  <!-- 5. Delete Modal -->
+  <div id="delete-modal" hidden>
+
+    <div class="modal-header">
+      <p>DELETE<button type="button" class="modal-close-button delete-button-close">&times;</button></p>
     </div>
+
+    <div class="modal-body">
+      Are you sure to delete your entire progress?
+    </div>
+
+    <div class="modal-footer">
+      <button type="button" id="delete-button-accept" class="modal-button accept">Yes</button>
+      <button type="button" class="modal-button cancel delete-button-close">Cancel</button>
+    </div>
+
   </div>
 
-  <div class="modal-footer">
-    <button type="button" id="save-button-accept" class="modal-button accept">Submit</button>
-    <button type="button" class="modal-button cancel save-modal-close">Cancel</button>
+  <!-- 6. undo/redo Modal -->
+  <div class="do-button-container">
+    <button type="button" id="undo" class="do-button"><i class="fas fa-undo-alt"></i><p>Undo</p></button>
+    <button type="button" id="redo" class="do-button"><i class="fas fa-redo-alt"></i><p>Redo</p></button>
   </div>
 
-</div>
-<!-- 4. Delete Modal -->
-<div id="delete-modal" hidden>
-
-  <div class="modal-header">
-    <p>DELETE<button type="button" class="modal-close-button delete-button-close">&times;</button></p>
-  </div>
-
-  <div class="modal-body">
-    Are you sure to delete your entire progress?
-  </div>
-
-  <div class="modal-footer">
-    <button type="button" id="delete-button-accept" class="modal-button accept">Yes</button>
-    <button type="button" class="modal-button cancel delete-button-close">Cancel</button>
-  </div>
-
-</div>
-
-<!-- 5. undo/redo Modal -->
-<div class="do-button-container">
-  <button type="button" id="undo" class="do-button"><i class="fas fa-undo-alt"></i><p>Undo</p></button>
-  <button type="button" id="redo" class="do-button"><i class="fas fa-redo-alt"></i><p>Redo</p></button>
-</div>
-
-<script src="https://code.jquery.com/jquery-3.6.0.js"></script>
-<script src="http://code.jquery.com/ui/jquery-ui-git.js"></script>
-<script src="editor.js"></script>
+  <script src="https://code.jquery.com/jquery-3.6.0.js"></script>
+  <script src="http://code.jquery.com/ui/jquery-ui-git.js"></script>
+  <script src="editor.js"></script>
 
   </body>
 </html>

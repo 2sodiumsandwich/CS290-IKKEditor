@@ -75,11 +75,6 @@ nav ul li {
   background-color: #D63C3E;
 }
 
-.tool-selected {
-  background-color: #161515;
-  border: 2px solid white;
-}
-
 .delete-button {
   background-color: #918787;
   border-radius: 12px;
@@ -393,8 +388,34 @@ button p {
   justify-content: center;
   position: absolute;
   top: 50%;
-  left: 40%;
-  margin: 300px 0px 0px 40px;
+  left: 50%;
+  margin: 300px 0px 0px -120px;
+}
+
+.tool-button {
+  background-color: #312F2F;
+  height: 70px;
+  width: 70px;
+  border-radius: 45px;
+  border: 0px;
+  color: #FAF7F7;
+  cursor: pointer;
+  margin-bottom: 5px;
+}
+
+.tool-button:hover {
+  background-color: #232222;
+}
+
+.tool-selected {
+  background-color: #161515;
+  height: 70px;
+  width: 70px;
+  border-radius: 45px;
+  color: #FAF7F7;
+  cursor: pointer;
+  margin-bottom: 5px;
+  border: 2px solid white;
 }
 
 #photo-canvas {
@@ -416,21 +437,6 @@ button p {
   border-radius: 12px;
   color: #FAF7F7;
   text-align: center;
-}
-
-#paint-tool-bar button {
-  background-color: #312F2F;
-  height: 70px;
-  width: 70px;
-  border-radius: 45px;
-  border: 0px;
-  color: #FAF7F7;
-  cursor: pointer;
-  margin-bottom: 5px;
-}
-
-#paint-tool-bar button:hover {
-  background-color: #232222;
 }
 
 #color-picker {

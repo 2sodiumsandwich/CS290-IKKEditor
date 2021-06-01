@@ -67,7 +67,8 @@
       <input onInput="draw_color = this.value" type="color" id="color-picker" name="paint-color" value="#000000">
 
       <div class="paint-function">
-        <button onClick="paint_tool()" type="button"><i class="fas fa-brush"></i><p>Brush</p></button>
+        <!-- add tool-selected class to the button when the user once selected the tool-->
+        <button class="tool-button" onClick="paint_tool()" type="button"><i class="fas fa-brush"></i><p>Brush</p></button>
         <div>
           <label for="brush-size">Brush Size</label>
 
@@ -78,7 +79,8 @@
       </div>
 
       <div class="paint-function">
-        <button onClick="erase_tool()" type="button"><i class="fas fa-eraser"></i><p>Eraser</p></button>
+        <!-- add tool-selected class to the button when the user once selected the tool-->
+        <button class="tool-button" onClick="erase_tool()" type="button"><i class="fas fa-eraser"></i><p>Eraser</p></button>
         <div>
           <label for="eraser-size">Eraser Size</label>
 
@@ -162,10 +164,10 @@
 
       <div class="modal-footer">
         <button type="button" id="save-button-accept" class="modal-button accept">Submit</button>
-      <button type="button" class="modal-button cancel save-modal-close">Cancel</button>
-    </div>
+        <button type="button" class="modal-button cancel save-modal-close">Cancel</button>
+      </div>
 
-  </div>
+    </div>
 
   <!-- 5. Delete Modal -->
   <div id="delete-modal" hidden>

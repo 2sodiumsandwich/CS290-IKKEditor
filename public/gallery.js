@@ -17,9 +17,18 @@ var listRef = storage.ref().child("pics");
 var pictures = [];
 var imagedata = [];
 
+function insertNewImage() {
+  var newimage = Handlebars.templates.image({})
+
+  var photoContainer = document.querySelector('main.photo-container');
+  photoContainer.insertAdjacentHTML("beforeend", newimage)
+}
+
+
 db.collection("photoStor").get().then((querySnapshot) => {
   querySnapshot.forEach((doc) => {
     imagedata.push(doc.data());
+    insertNewImage();
     //var gsReference = storage.refFromURL(imageurl);
   });
 

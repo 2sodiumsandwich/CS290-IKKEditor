@@ -1,67 +1,90 @@
-var http = require("http");
-var fs = require('fs');
+/*
+ * Write your routing code in this file.  Make sure to add your name and
+ * @oregonstate.edu email address below.
+ *
+ * Name:
+ * Email:
+ */
 
-var htmlLink = fs.readFileSync('public/index.html');
-var galleryLink = fs.readFileSync('public/gallery.html');
-var galleryjsLink = fs.readFileSync('public/gallery.js');
-var editorjsLink = fs.readFileSync('public/editor.js');
-var cssLink = fs.readFileSync('public/style.css');
-var errorLink = fs.readFileSync('public/404.html');
+var path = require('path');
+var express = require('express');
 
-console.log("PORT:", process.env.PORT);
+var app = express();
+var port = process.env.PORT || 3000;
+const ViewEngine = require("express-handlebars");
 
-function requestHandler(req, res) {
-    console.log("method:", req.method);
-    console.log("url:", req.url);
-    console.log("headers:", req.headers);
+function basicPages(req, res, next) {
+  var pagenum = null;
+  if (req.url === "/") {
+    pagenum = 0;
+  }
+  else if (req.params.nav) {
+    switch (req.params.nav.toLowerCase()) {
+      case "home":
+        pagenum = 0;
+        break;
+      case "gallery":
+        pagenum = 1;
+        req["gallery"] = -1;
+        break;
+      default:
+        pagenum = -1;
+        req["404"] = -1;
+        break;
+    }
+  }
+  else {
+    pagenum = -5;
+  }
 
-    if ((req.url == '/index.html') || (req.url == '/')) {
-        res.writeHead(200, {
-            "Content-Type": "text/html"
-        });
-        res.write(htmlLink);
-    }
-    else if (req.url == '/gallery.html') {
-        res.writeHead(200, {
-            "Content-Type": "text/html"
-        });
-        res.write(galleryLink);
-    }
-    else if (req.url == '/style.css') {
-        res.writeHead(200, {
-            "Content-Type": "text/css"
-        });
-        res.write(cssLink);
-    }
-    else if (req.url == '/gallery.js') {
-        res.writeHead(200, {
-            "Content-Type": "text/js"
-        });
-        res.write(galleryjsLink);
-    }
-    else if (req.url == '/editor.js') {
-        res.writeHead(200, {
-            "Content-Type": "text/js"
-        });
-        res.write(editorjsLink);
-    }
-    else if (req.url == '/404.html') {
-        res.writeHead(200, {
-            "Content-Type": "text/html"
-        });
-        res.write(errorLink);
-    }
-    else {
-        res.writeHead(404, {
-            "Content-Type": "text/html"
-        });
-        res.write(errorLink);
-    }
-    res.end();
+  const navs = [{ str: "Home" }, { str: "Gallery" }];
+  if (pagenum > -1) {
+    navs[pagenum].active = true;
+  }
+  req.handlebarnav = navs;
+
+  next();
+  return;
 }
 
-var server = http.createServer(requestHandler);
+app.engine('handlebars', ViewEngine());
+app.set('view engine', 'handlebars');
+app.get("/", basicPages, function (req, res, next) {
 
-server.listen(3000, function (err) {
-    console.log("Server is on port 3000");
+  res.status(200).render("index", {
+    navlinks: req.handlebarnav,
+    layout: false
+  })
+  return;
+});
+app.get('/:nav', basicPages, function (req, res, next) {
+
+  if (req["404"] === -1) {
+    next();
+    return;
+  }
+  else if(req["gallery"] === -1){
+      res.status(200).render('gallery',{
+          navlinks: req.handlebarnav,
+          layout: false
+      })
+      return;
+  }
+  res.status(200).render("index", {
+    navlinks: req.handlebarnav,
+    layout: false
+  })
+  return;
+})
+app.use(express.static('public'));
+
+app.get('*', basicPages, function (req, res) {
+  res.status(404).render('404', {
+    navlinks: req.handlebarnav,
+    layout: false
+  })
+});
+
+app.listen(port, function () {
+  console.log("== Server is listening on port", port);
 });

@@ -34,7 +34,7 @@ db.collection("photoStor").get().then((querySnapshot) => {
   }
 }).then(() => {
   imagedata.forEach((currentDoc, i) => {
-    itemRef = storage.refFromURL(currentDoc["image-url"]);
+    itemRef = storage.refFromURL(currentDoc.imageurl);
     itemRef.getDownloadURL().then((url) => {
       console.log(url);
       imagedata[i].image = url;

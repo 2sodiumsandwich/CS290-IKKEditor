@@ -3,7 +3,8 @@ var fs = require('fs');
 
 var htmlLink = fs.readFileSync('public/index.html');
 var galleryLink = fs.readFileSync('public/gallery.html');
-var jsLink = fs.readFileSync('public/gallery.js');
+var galleryjsLink = fs.readFileSync('public/gallery.js');
+var editorjsLink = fs.readFileSync('public/editor.js');
 var cssLink = fs.readFileSync('public/style.css');
 var errorLink = fs.readFileSync('public/404.html');
 
@@ -36,7 +37,13 @@ function requestHandler(req, res) {
         res.writeHead(200, {
             "Content-Type": "text/js"
         });
-        res.write(jsLink);
+        res.write(galleryjsLink);
+    }
+    else if (req.url == '/editor.js') {
+        res.writeHead(200, {
+            "Content-Type": "text/js"
+        });
+        res.write(editorjsLink);
     }
     else if (req.url == '/404.html') {
         res.writeHead(200, {

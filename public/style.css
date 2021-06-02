@@ -404,6 +404,7 @@ button p {
   border-radius: 15px;
   box-shadow: 1px 1px 5px #919090;
   z-index: 1010;
+  display: none;
 }
 
 #save-modal .modal-body {
@@ -426,6 +427,7 @@ button p {
   border-radius: 15px;
   box-shadow: 1px 1px 5px #919090;
   z-index: 1010;
+  display: none;
 }
 
 #delete-modal > div:nth-child(2) {

@@ -1,86 +1,201 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <!-- The core Firebase JS SDK is always required and must be listed first -->
-    <script src="https://www.gstatic.com/firebasejs/8.6.2/firebase-app.js"></script> 
-    <script src="https://www.gstatic.com/firebasejs/8.6.2/firebase-firestore.js"></script>
-    <script src="https://www.gstatic.com/firebasejs/8.6.2/firebase-storage.js"></script>
 
     <meta charset="utf-8">
     <title>IKKEditor</title>
 
     <!-- Fontfamily -->
     <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@100;400&display=swap" rel="stylesheet">
-
     <!-- Icon -->
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.15.3/css/all.css" crossorigin="anonymous">
 
     <link rel="stylesheet" href="style.css" media="screen">
 
-    <script src="gallery.js" charset="utf-8" defer></script>
   </head>
 
   <body>
 
     <header>
-      <a href="#"><h1 class="site-title"><i class="fas fa-image"></i>IKKEditor</h1></a>
+      <a href="index.html"><h1 class="site-title"><i class="fas fa-image"></i>IKKEditor</h1></a>
       <nav class="menubar">
         <ul class="menulist">
-          <li class="menuitem menulink"><a href="index.html">Home</a></li>
-          <li class="menuitem menulink active"><a href="gallery.html">Gallery</a></li>
+          <li class="menuitem menulink active"><a href="index.html">Home</a></li>
+          <li class="menuitem menulink"><a href="gallery.html">Gallery</a></li>
         </ul>
       </nav>
     </header>
 
-    <main class="photo-container">
 
-      <article class="edited-photo">
-        <img type="button" onclick="openImage(this.id)" class="image-button"></img>
+    <main>
+      <article class="menu-button-container">
+        <button type="button" id="paint-toggle" class="menu-button"><i class="fas fa-paint-brush"></i><p>Paint</p></button>
+        <button type="button" id="decoration-toggle" class="menu-button"><i class="fas fa-holly-berry"></i><p>Decoration</p></button>
+        <button type="button" id="adjustment-toggle" class="menu-button"><i class="fas fa-sliders-h"></i><p>Adjustment</p></button>
+        <button type="button" id="crop-toggle" class="menu-button"><i class="fas fa-crop-alt"></i><p>Crop</p></button>
+        <button type="button" id="save-button" class="menu-button"><i class="far fa-save"></i><p>Save</p></button>
+        <button type="button" class="delete-button"><i class="far fa-trash-alt"></i><p>Delete</p></button>
       </article>
-
-      <article class="edited-photo">
-        <img type="button" onclick="openImage(this.id)" class="image-button"></img>
-      </article>
-
     </main>
 
-    <div id="modal-backdrop"></div>
+    <div id="modal-backdrop" class="hidden"></div>
+<!-- The sections below are about the functions of each menu -->
+    <div>
 
-    <div id="show-up">
-      <div id="show-up-wrapper">
-        <div id="show-up-photo">
-          <img id="image">
-        </div>
+      <canvas id="photo-canvas" width="960" height="540">
+        <!-- This field is for the user's photo. Need javascript. -->
+      </canvas>
+      <canvas id="drawing-canvas" width="960" height="540">
+        <!-- This field is for the user's photo. Need javascript. -->
+      </canvas>
 
-        <div id="description-modal">
-          <div class="modal-header">
-            <p>DESCRIPTION<button type="button" onclick="closeModal()" class="modal-close-button">&times;</button></p>
-          </div>
+    </div>
 
-          <div class="modal-body">
-            <div class="photo-input-element">
-              <p class="desc-contents">[Title]</p>
-              <p id="title">This is a title</p>
-            </div>
+    <button class="upload-button-container">
+      <input type="file" accept="image/*" id="upload-photo-button" hidden/>
+      <label for="upload-photo-button"><i class="far fa-image"></i><p>Choose file</p></label>
+    </button>
 
-            <div class="photo-input-element">
-              <p class="desc-contents">[User name]</p>
-              <p id="author">This is an user name</p>
-            </div>
 
-            <div class="photo-input-element">
-              <p class="desc-contents">[Description]</p>
-              <p id="description">This is a description</p>
-            </div>
 
-            <div class="modal-footer">
-              <button type="button" onclick="downloadImage(this.id)" class="modal-button accept">Download</button>
-              <button type="button" onclick="closeModal()" class="modal-button cancel">Close</button>
-            </div>
-          </div>
+<!-- 1. Paint tool -->
+    <div id="paint-tool-bar" class="tool-bar" hidden>
+
+      <div class="tool-bar-header">
+        <p>Paint Tool</p>
+      </div>
+      <input onInput="draw_color = this.value" type="color" id="color-picker" name="paint-color" value="#000000">
+
+      <div class="paint-function">
+        <!-- add tool-selected class to the button when the user once selected the tool-->
+        <button class="tool-button" onClick="paint_tool()" type="button"><i class="fas fa-brush"></i><p>Brush</p></button>
+        <div>
+          <label for="brush-size">Brush Size</label>
+
+          <input name="brush-size" id="slider-fill"
+          type="range" min="0" max="200" value="10" step="1" data-highlight="true" onInput="draw_width = this.value">
+
         </div>
       </div>
+
+      <div class="paint-function">
+        <!-- add tool-selected class to the button when the user once selected the tool-->
+        <button class="tool-button" onClick="erase_tool()" type="button"><i class="fas fa-eraser"></i><p>Eraser</p></button>
+        <div>
+          <label for="eraser-size">Eraser Size</label>
+
+          <input name="eraser-size" id="slider-fill" type="range" min="0" max="200" value="10" step="1" data-highlight="true" onInput="erase_width = this.value">
+
+        </div>
+      </div>
+
     </div>
+
+  <!-- 2. Adjustment tool -->
+    <div id="adjustment-tool-bar" class="tool-bar" hidden>
+
+      <div class="tool-bar-header">
+        <p>Adjustment Tool</p>
+      </div>
+      <div class="adjust-brightness">
+        <div>
+          <label for="brightness"><i class="fas fa-sun"></i> Brightness</label>
+          <input name="brightness" id="brightness-slider" type="range" min="0" max="100" value="50" step="1">
+        </div>
+      </div>
+
+      <div class="adjust-contrast">
+        <div>
+          <label for="contrast"><i class="fas fa-adjust"></i> Contrast</label>
+          <input name="contrast" id="contrast-slider" type="range" min="0" max="100" value="50" step="1">
+        </div>
+      </div>
+
+      <div class="adjust-saturation">
+        <div>
+          <label for="contrast"><i class="fas fa-tint"></i> Saturation</label>
+          <input name="contrast" id="saturation-slider" onInput= "sat_slider_val = this.value" type="range" min="0" max="100" value="50" step="1" >
+        </div>
+      </div>
+
+    </div>
+
+    <!-- 3. Decoration tool -->
+    <div id="decoration-tool-bar" class="tool-bar" hidden>
+
+      <div class="stickers-container">
+        <div class="tool-bar-header">
+          <p>Decorations</p>
+        </div>
+        <button type="button" class="sticker-button"><img src="https://cdn.pixabay.com/photo/2016/03/31/18/20/heart-1294292_960_720.png" alt="Heart"></button>
+        <button type="button" class="sticker-button"><img src="https://cdn.pixabay.com/photo/2016/04/04/22/27/bart-1308411_960_720.png" alt="Bart"></button>
+        <button type="button" class="sticker-button"><img src="https://cdn.pixabay.com/photo/2014/04/03/11/38/sunglasses-312051_960_720.png" alt="Glasses"></button>
+        <button type="button" class="sticker-button"><img src="https://cdn.pixabay.com/photo/2016/01/20/17/19/flower-1151970_960_720.png" alt="Flower"></button>
+        <button type="button" class="sticker-button"><img src="https://cdn.pixabay.com/photo/2019/07/12/00/09/wreath-4331664_960_720.png" alt="Wreath"></button>
+        <button type="button" class="sticker-button"><img src="https://cdn.pixabay.com/photo/2017/01/31/13/16/flora-2023951_960_720.png" alt="Flora"></button>
+        <button type="button" class="sticker-button"><img src="https://cdn.pixabay.com/photo/2020/01/12/08/14/sunglass-4759505_960_720.png" alt="Heart-sunglasses"></button>
+        <button type="button" class="sticker-button"><img src="https://cdn.pixabay.com/photo/2012/04/18/14/29/heart-37198_960_720.png" alt="Star-heart"></button>
+      </div>
+    </div>
+
+    <!-- 4. Save Modal -->
+    <div id="save-modal" hidden>
+
+      <div class="modal-header">
+        <p>SAVE<button type="button" class="modal-close-button save-modal-close">&times;</button></p>
+      </div>
+
+      <div class="modal-body">
+        <div class="photo-input-element">
+          <label for="title-text-input">Title:</label>
+          <textarea id="title-text-input"></textarea>
+        </div>
+
+        <div class="photo-input-element">
+          <label for="name-text-input">User's name:</label>
+          <textarea id="name-text-input"></textarea>
+        </div>
+
+        <div class="photo-input-element">
+          <label for="desc-text-input">Description:</label>
+          <textarea id="desc-text-input"></textarea>
+        </div>
+      </div>
+
+      <div class="modal-footer">
+        <button type="button" id="save-button-accept" class="modal-button accept">Submit</button>
+        <button type="button" class="modal-button cancel save-modal-close">Cancel</button>
+      </div>
+
+    </div>
+
+  <!-- 5. Delete Modal -->
+  <div id="delete-modal" hidden>
+
+    <div class="modal-header">
+      <p>DELETE<button type="button" class="modal-close-button delete-button-close">&times;</button></p>
+    </div>
+
+    <div class="modal-body">
+      Are you sure to delete your entire progress?
+    </div>
+
+    <div class="modal-footer">
+      <button type="button" id="delete-button-accept" class="modal-button accept">Yes</button>
+      <button type="button" class="modal-button cancel delete-button-close">Cancel</button>
+    </div>
+
+  </div>
+
+  <!-- 6. undo/redo Modal -->
+  <div class="do-button-container">
+    <button type="button" id="undo" class="do-button"><i class="fas fa-undo-alt"></i><p>Undo</p></button>
+    <button type="button" id="redo" class="do-button"><i class="fas fa-redo-alt"></i><p>Redo</p></button>
+  </div>
+
+  <script src="https://code.jquery.com/jquery-3.6.0.js"></script>
+  <script src="http://code.jquery.com/ui/jquery-ui-git.js"></script>
+  <script src="editor.js"></script>
 
   </body>
 </html>

@@ -151,10 +151,6 @@ button p {
 }
 
 .stickers-container {
-  position: absolute;
-  left: 50%;
-  top: 50%;
-  margin: -200px 0px 0px -730px;
   background-color: #4F4C4C;
   height: auto;
   width: 200px;
@@ -418,6 +414,20 @@ button p {
   border: 2px solid white;
 }
 
+.error-prompt {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  margin: -70px 0px 0px -220px;
+  text-align: center;
+  background-color: white;
+  height: 130px;
+  width: 450px;
+  border-radius: 15px;
+  box-shadow: 1px 1px 5px #919090;
+  z-index: 1020;
+}
+
 #photo-canvas {
   position: absolute;
   top: 50%;
@@ -461,6 +471,13 @@ button p {
   border-radius: 12px;
   color: #FAF7F7;
   text-align: center;
+}
+
+#decoration-tool-bar {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  margin: -200px 0px 0px -730px;
 }
 
 #slider {

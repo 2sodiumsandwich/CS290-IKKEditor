@@ -12,6 +12,10 @@
 
     <link rel="stylesheet" href="style.css" media="screen">
 
+    <script src="https://code.jquery.com/jquery-3.6.0.js"></script>
+    <script src="http://code.jquery.com/ui/jquery-ui-git.js"></script>
+    <script src="editor.js"></script>
+
   </head>
 
   <body>
@@ -193,9 +197,16 @@
     <button type="button" id="redo" class="do-button"><i class="fas fa-redo-alt"></i><p>Redo</p></button>
   </div>
 
-  <script src="https://code.jquery.com/jquery-3.6.0.js"></script>
-  <script src="http://code.jquery.com/ui/jquery-ui-git.js"></script>
-  <script src="editor.js"></script>
+  <!-- 7. Error prompt -->
+  <div class="error-prompt">
+    <div class="modal-header">
+      <p><i class="fas fa-exclamation"></i></p>
+    </div>
+    <div class="prompt-body">
+      <p>Write the error message</p>
+      <button type="button" class="modal-button cancel delete-button-close">Close</button>
+    </div>
+  </div>
 
   </body>
 </html>

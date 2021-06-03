@@ -64,27 +64,26 @@
       <div class="tool-bar-header">
         <p>Paint Tool</p>
       </div>
-      <input onInput="draw_color = this.value" type="color" id="color-picker" name="paint-color" value="#000000">
+      <input type="color" id="color-picker" name="paint-color" value="#000000">
 
       <div class="paint-function">
         <!-- add tool-selected class to the button when the user once selected the tool-->
-        <button class="tool-button" onClick="paint_tool()" type="button"><i class="fas fa-brush"></i><p>Brush</p></button>
+        <button id= "paint-button" class="tool-button" type="button"><i class="fas fa-brush"></i><p>Brush</p></button>
         <div>
           <label for="brush-size">Brush Size</label>
 
-          <input name="brush-size" id="slider-fill"
-          type="range" min="0" max="200" value="10" step="1" data-highlight="true" onInput="draw_width = this.value">
+          <input name="brush-size" id="paint-slider" type="range" min="0" max="200" value="10" step="1" data-highlight="true">
 
         </div>
       </div>
 
       <div class="paint-function">
         <!-- add tool-selected class to the button when the user once selected the tool-->
-        <button class="tool-button" onClick="erase_tool()" type="button"><i class="fas fa-eraser"></i><p>Eraser</p></button>
+        <button id= "erase-button" class="tool-button" type="button"><i class="fas fa-eraser"></i><p>Eraser</p></button>
         <div>
           <label for="eraser-size">Eraser Size</label>
 
-          <input name="eraser-size" id="slider-fill" type="range" min="0" max="200" value="10" step="1" data-highlight="true" onInput="erase_width = this.value">
+          <input name="eraser-size" id="eraser-slider" type="range" min="0" max="200" value="10" step="1" data-highlight="true">
 
         </div>
       </div>

@@ -20,10 +20,6 @@
  // NEW CODEEEEEEEEEEE
  //NEW PAINT CODE
  
- var paintToggle = document.getElementById("paint-toggle");
- console.log("PaintToggle", paintToggle)
- paintToggle.addEventListener("click", paint_Toggle, false);
- //default paint values
  let paint = false;
  let draw_color = "black";
  let draw_width = "10";
@@ -31,13 +27,6 @@
  let is_drawing = false;
  let is_erasing = false;
  
- function paint_Toggle(){
-     if (paint == true){
-         paint = false;
-     }else if (paint == false){
-         paint = true;
-     }
- }
 
  drawing_canvas.addEventListener("touchstart", start, false);
  drawing_canvas.addEventListener("touchmove", drawFunc, false);
@@ -59,9 +48,19 @@
  }
  
  function drawFunc(event){
-     if (is_drawing && is_erasing && paint && active){
-        drawing_ctx.clearRect(event.clientX - canvas.offsetLeft, event.clientY - canvas.offsetTop, erase_width, erase_width)
+     if (is_drawing && is_erasing && active){
+        drawing_ctx.globalCompositeOperation ='destination-out';
+        drawing_ctx.lineTo(event.clientX - canvas.offsetLeft, event.clientY - canvas.offsetTop);
+        drawing_ctx.strokeStyle = "#000";
+        drawing_ctx.lineWidth = erase_width;
+        drawing_ctx.lineCap = "round";
+        drawing_ctx.lineJoin = "round";
+        drawing_ctx.stroke();
+        
+
+        // drawing_ctx.clearRect(event.clientX - canvas.offsetLeft, event.clientY - canvas.offsetTop, erase_width, erase_width)
      }else if (is_drawing && paint && active) {
+         drawing_ctx.globalCompositeOperation = 'source-over'
          console.log("Drawing")
          drawing_ctx.lineTo(event.clientX - canvas.offsetLeft, event.clientY - canvas.offsetTop);
          drawing_ctx.strokeStyle = draw_color;
@@ -85,33 +84,7 @@
     }
      event.preventDefault();
  }
- 
- function erase_tool(){
-     if (is_erasing == true){
-     is_erasing = false;
-     }else if (is_erasing == false){
-         is_erasing = true;
-     }
-     if (paint == false){
-        paint = true;
-     }
-     if (sticker_toggle == true){
-         sticker_toggle = false;
-     }
- }
- 
- function paint_tool(){
-     if (is_erasing == true){
-         is_erasing = false;
-     }
-     if (paint == false){
-         paint = true;
-     }
-     if (sticker_toggle == true){
-        sticker_toggle = false;
-    }
-}
- 
+
  //NEW CODE//
  
  //default values on page load
@@ -282,10 +255,35 @@
       * Paint stuff
       */
  
-     $('#paint-toggle').click(() => {
-         $('#paint-tool-bar').toggle();
-     })
- 
+    $('#paint-toggle').click(() => {
+        $('#paint-tool-bar').toggle();
+    })
+    
+    $('#paint-button').click(() => {
+        console.log("paint")
+        paint = !paint;
+        is_erasing = false;
+        sticker_toggle = false;
+    });
+    
+    $('#erase-button').click(() => {
+        is_erasing = !is_erasing;
+        paint = false;
+        sticker_toggle = false;
+    });
+    
+    $('#color-picker').on('change', function (e) {
+        draw_color = $(this).val(); 
+        console.log($(this).val());
+    })
+    
+    $('#paint-slider').on('input', function (e) {
+        draw_width = e.target.value == 0 ? 1 : e.target.value;
+    })
+    
+    $('#eraser-slider').on('input', function (e) {
+        erase_width = e.target.value;
+    })
      /**
       * Adjustment stuff
       */

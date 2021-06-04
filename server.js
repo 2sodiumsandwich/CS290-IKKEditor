@@ -46,13 +46,13 @@ function requestHandler(req, res) {
     }
     else if (req.url == '/gallery.js') {
         res.writeHead(200, {
-            "Content-Type": "text/js"
+            "Content-Type": "text/javascript"
         });
         res.write(jsLink);
     }
     else if (req.url == '/decoration.js') {
         res.writeHead(200, {
-            "Content-Type": "text/js"
+            "Content-Type": "text/javascript"
         });
         res.write(jsLink1);
     }

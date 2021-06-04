@@ -1,0 +1,25 @@
+{
+  "name": "ikke-editor",
+  "version": "1.0.0",
+  "description": "Handlebars templating for IKKE",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/2sodiumsandwich/CS290-IKKEditor"
+  },
+  "author": "",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/2sodiumsandwich/CS290-IKKEditor/issues"
+  },
+  "homepage": "https://github.com/2sodiumsandwich/CS290-IKKEditor#readme",
+  "dependencies": {
+    "express": "^4.17.1",
+    "firebase": "^8.6.2"
+  },
+  "devDependencies": {}
+}

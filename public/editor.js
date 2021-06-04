@@ -111,6 +111,8 @@ function crop() {
     y1 = (cropY1 < canY ? 0 : cropY1 - canY)
     y2 = (cropY2 > canY + imageHeight ? imageHeight : cropY2 - canY)
     
+    
+
     let newWidth = x2 - x1;
     let newHeight = y2 - y1;
 
@@ -157,6 +159,8 @@ function crop() {
 
         tempDrawingImg.src = tempcan.toDataURL();
 
+
+        drawing_ctx.globalCompositeOperation = 'source-over';
         drawing_ctx.clearRect(0, 0, drawing_canvas.width, drawing_canvas.height);
         tempDrawingImg.onload = function () {
             drawing_ctx.drawImage(tempDrawingImg, x1, y1, newWidth, newHeight, canX, canY, imageWidth, imageHeight)
@@ -228,18 +232,28 @@ function redo() {
 }
 
 function drawFunc(event){
-    if (is_drawing && is_erasing){
-        drawing_ctx.clearRect(event.clientX - canvas.offsetLeft, event.clientY - canvas.offsetTop, erase_width, erase_width)
-    } else if (is_drawing && paint) {
+    if (is_drawing && is_erasing && active){
+       drawing_ctx.globalCompositeOperation ='destination-out';
+       drawing_ctx.lineTo(event.clientX - canvas.offsetLeft, event.clientY - canvas.offsetTop);
+       drawing_ctx.strokeStyle = "#000";
+       drawing_ctx.lineWidth = erase_width;
+       drawing_ctx.lineCap = "round";
+       drawing_ctx.lineJoin = "round";
+       drawing_ctx.stroke();
+       
+
+       // drawing_ctx.clearRect(event.clientX - canvas.offsetLeft, event.clientY - canvas.offsetTop, erase_width, erase_width)
+    }else if (is_drawing && paint && active) {
+        drawing_ctx.globalCompositeOperation = 'source-over'
+        console.log("Drawing")
         drawing_ctx.lineTo(event.clientX - canvas.offsetLeft, event.clientY - canvas.offsetTop);
         drawing_ctx.strokeStyle = draw_color;
         drawing_ctx.lineWidth = draw_width;
         drawing_ctx.lineCap = "round";
         drawing_ctx.lineJoin = "round";
         drawing_ctx.stroke();
-
-        event.preventDefault();
     }
+    event.preventDefault();
 }
 
 function stop(event){
@@ -256,13 +270,7 @@ function stop(event){
     } 
     event.preventDefault();
 }
-
-
 //NEW CODE//
-
-
-
-
 
 function layerSaturation(pixelArray) {
     // RGB to HSL to RGB, look at documentation 
@@ -387,7 +395,7 @@ reset();
 $(function() {
     //draggable() from jquery UI lib, makes things draggable.
     //TODO make stuff not draggable off screen
-    $('#adjustment-tool-bar, #paint-tool-bar, #save-modal, #delete-modal').draggable();
+    $('#adjustment-tool-bar, #paint-tool-bar, #save-modal, #delete-modal, #decoration-tool-bar').draggable();
 
     $('#upload-photo-button').change(function(e) {
         let imagefile = e.target.files[0];
@@ -438,25 +446,31 @@ $(function() {
         cropping = !cropping;
         paint = false;
         is_erasing = false;
+        sticker_toggle = false;
     })
     /**
      * Paint stuff
      */
+
+
  
     $('#paint-toggle').click(() => {
         $('#paint-tool-bar').toggle();
     })
 
+
     $('#paint-button').click(() => {
         paint = !paint;
         is_erasing = false;
         cropping = false;
+        sticker_toggle = false;
     });
 
     $('#erase-button').click(() => {
         is_erasing = !is_erasing;
         paint = false;
         cropping = false;
+        sticker_toggle = false;
     });
 
     $('#color-picker').on('change', function (e) {
@@ -611,3 +625,12 @@ $(function() {
         $('#save-modal').toggle();
     });  
 });
+
+$('#decoration-toggle').click(() => {
+    $('#decoration-tool-bar').toggle();
+    sticker_toggle != sticker_toggle;
+    paint = false;
+    cropping = false;
+    is_erasing = false;
+})
+

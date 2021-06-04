@@ -30,6 +30,7 @@
     <main>
       <article class="menu-button-container">
         <button type="button" id="paint-toggle" class="menu-button"><i class="fas fa-paint-brush"></i><p>Paint</p></button>
+        <button type="button" id="decoration-toggle" class="menu-button"><i class="fas fa-holly-berry"></i><p>Decoration</p></button>
         <button type="button" id="adjustment-toggle" class="menu-button"><i class="fas fa-sliders-h"></i><p>Adjustment</p></button>
         <button type="button" id="crop-toggle" class="menu-button"><i class="fas fa-crop-alt"></i><p>Crop</p></button>
         <button type="button" id="save-button" class="menu-button"><i class="far fa-save"></i><p>Save</p></button>
@@ -116,7 +117,25 @@
 
     </div>
 
-<!-- 3. Save Modal -->
+
+    <!-- 3. Decoration tool -->
+    <div id="decoration-tool-bar" class="tool-bar" hidden>
+
+      <div class="stickers-container">
+        <div class="tool-bar-header">
+          <p>Decorations</p>
+        </div>
+        <button id="heart-button" type="button" class="sticker-button"><img src="./sticker-imgs/heart.png" alt="Heart"></button>
+        <button id="bow-button" type="button" class="sticker-button"><img src="./sticker-imgs/bow.png" alt="Bow"></button>
+        <button id="cake-button" type="button" class="sticker-button"><img src="./sticker-imgs/cake.png" alt="Cake"></button>
+        <button id="flower-button" type="button" class="sticker-button"><img src="./sticker-imgs/flower.png" alt="Flower"></button>
+        <button id="monkey-button" type="button" class="sticker-button"><img src="./sticker-imgs/monkey.png" alt="Monkey"></button>
+        <button id="rice-button" type="button" class="sticker-button"><img src="./sticker-imgs/rice-ball.png" alt="Rice Ball"></button>
+        <button id="sparkles-button" type="button" class="sticker-button"><img src="./sticker-imgs/sparkles.png" alt="Sparkles"></button>
+        <button id="micheal-button" type="button" class="sticker-button"><img src="./sticker-imgs/micheal.png" alt="Micheal"></button>
+      </div>
+    </div>
+<!-- 4. Save Modal -->
 <div id="save-modal" hidden>
 
   <div class="modal-header">
@@ -146,7 +165,7 @@
   </div>
 
 </div>
-<!-- 4. Delete Modal -->
+<!-- 5. Delete Modal -->
 <div id="delete-modal" hidden>
 
   <div class="modal-header">
@@ -173,6 +192,8 @@
 <script src="https://code.jquery.com/jquery-3.6.0.js"></script>
 <script src="http://code.jquery.com/ui/jquery-ui-git.js"></script>
 <script src="editor.js"></script>
+
+<script src="decoration.js"></script>
 
   </body>
 </html>

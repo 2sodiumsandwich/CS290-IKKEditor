@@ -75,11 +75,6 @@ nav ul li {
   background-color: #D63C3E;
 }
 
-.tool-selected {
-  background-color: #161515;
-  border: 2px solid white;
-}
-
 .delete-button {
   background-color: #918787;
   border-radius: 12px;
@@ -106,7 +101,7 @@ nav ul li {
   position: absolute;
   top: 50%;
   left: 50%;
-  margin: -220px 0px 0px 550px;
+  margin: -270px 0px 0px 550px;
 }
 
 .menu-button-container button {
@@ -131,6 +126,10 @@ nav ul li {
   font-size: 35px;
 }
 
+.fa-holly-berry {
+  font-size: 35px;
+}
+
 button p {
   margin: 5px 0px 0px 0px;
 }
@@ -149,6 +148,43 @@ button p {
 
 .fa-trash-alt {
   font-size: 20px;
+}
+
+.stickers-container {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  margin: -200px 0px 0px -730px;
+  background-color: #4F4C4C;
+  height: auto;
+  width: 200px;
+  border-radius: 12px;
+  color: #FAF7F7;
+  text-align: center;
+}
+
+.sticker-button {
+  background: none;
+  border: 2px solid white;
+  border-radius: 2px;
+  margin: 10px 5px 10px 5px;
+  width: 80px;
+  height: 80px;
+  cursor: pointer;
+}
+
+.sticker-button:hover {
+  background: grey;
+}
+
+.sticker-button:active {
+  background: #E47D78;
+}
+
+.sticker-button img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
 }
 
 .modal-header {
@@ -258,7 +294,7 @@ button p {
 
 .photo-input-element textarea {
   resize: none;
-  width: 400px;
+  width: 415px;
 }
 
 .modal-footer
@@ -267,8 +303,119 @@ button p {
   margin-top: 15px;
 }
 
+.error-container {
+  margin-top: 50px;
+  text-align: center;
+  color: #4F4C4C;
+}
+
+.error-container p{
+  font-size: 100px;
+  margin: 0;
+}
+
+.error-container h2 {
+  margin: 10px 0;
+  font-size: 96px;
+  font-weight: 400;
+}
+
+.error-container h3 {
+  margin-top: 10px 0;
+  font-size: 36px;
+  font-weight: 600;
+}
+
+.photo-container {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+
+.image-button {
+  height: 200px;
+  width: 200px;
+  margin: 8px;
+  background-image: url("hamster.png");
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: cover;
+  border: none;
+  box-shadow: 1px 1px 5px #919090;
+  border-radius: 8px;
+  cursor: pointer;
+}
+
+.image-button:hover {
+  border: 5px solid #E47D78;
+}
+
+.image-button:active {
+  border: 5px solid #FF4848;
+}
+
+.desc-contents {
+  font-weight: 600;
+}
+
 .hidden {
   display: none;
+}
+
+.do-button {
+  background-color: #E47D78;
+  width: 120px;
+  height: 60px;
+  border-radius: 15px;
+  border: 0px;
+  color: white;
+  cursor: pointer;
+  margin: 5px;
+}
+
+.do-button:hover {
+  background-color: #D96E69;
+}
+
+.do-button:active {
+  background-color: #D63C3E;
+}
+
+.do-button-container {
+  display: flex;
+  flex-wrap: wrap;
+  flex-direction: row;
+  justify-content: center;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  margin: 300px 0px 0px -120px;
+}
+
+.tool-button {
+  background-color: #312F2F;
+  height: 70px;
+  width: 70px;
+  border-radius: 45px;
+  border: 0px;
+  color: #FAF7F7;
+  cursor: pointer;
+  margin-bottom: 5px;
+}
+
+.tool-button:hover {
+  background-color: #232222;
+}
+
+.tool-selected {
+  background-color: #161515;
+  height: 70px;
+  width: 70px;
+  border-radius: 45px;
+  color: #FAF7F7;
+  cursor: pointer;
+  margin-bottom: 5px;
+  border: 2px solid white;
 }
 
 #photo-canvas {
@@ -315,6 +462,7 @@ button p {
   background-color: #232222;
 }
 
+
 #color-picker {
   background-color: #312F2F;
   padding: 5px;
@@ -343,6 +491,10 @@ button p {
   margin: 5px 0px 5px 0px;
 }
 
+#slider-fill {
+
+}
+
 #save-modal {
   position: absolute;
   top: 50%;
@@ -353,6 +505,7 @@ button p {
   width: 450px;
   border-radius: 15px;
   box-shadow: 1px 1px 5px #919090;
+  z-index: 1010;
 }
 
 #save-modal .modal-body {
@@ -374,6 +527,7 @@ button p {
   width: 450px;
   border-radius: 15px;
   box-shadow: 1px 1px 5px #919090;
+  z-index: 1010;
 }
 
 #delete-modal > div:nth-child(2) {
@@ -388,35 +542,36 @@ button p {
   left: 0;
   right: 0;
   z-index: 1000;
-  background-color: rgba(0, 0, 0, 0.45);
+  background-color: rgba(255, 255, 255, 0.55);
 }
 
-.do-button {
-  background-color: #E47D78;
-  width: 120px;
-  height: 60px;
-  border-radius: 15px;
-  border: 0px;
-  color: white;
-  cursor: pointer;
-  margin: 5px;
-}
-
-.do-button:hover {
-  background-color: #D96E69;
-}
-
-.do-button:active {
-  background-color: #D63C3E;
-}
-
-.do-button-container {
-  display: flex;
-  flex-wrap: wrap;
-  flex-direction: row;
-  justify-content: center;
+#show-up {
   position: absolute;
-  top: 50%;
-  left: 40%;
-  margin: 300px 0px 0px 40px;
+  top: 5%;
+  left: 5%;
+}
+
+#show-up-wrapper {
+  display: flex;
+  justify-content: center;
+}
+
+#show-up-photo {
+  z-index: 1010;
+}
+
+#description-modal {
+  text-overflow: ellipsis;
+  margin-top: 2%;
+  margin-left: 10px;
+  background-color: white;
+  z-index: 1010;
+  border-radius: 15px;
+  box-shadow: 1px 1px 5px #919090;
+  width: 350px;
+  height: 280px;
+}
+
+#description-modal .modal-body p {
+  margin: 0px 8px 8px 8px;
 }

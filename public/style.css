@@ -491,8 +491,10 @@ button p {
   margin: 5px 0px 5px 0px;
 }
 
-#slider-fill {
-
+#decoration-tool-bar {
+  position: absolute;
+  left: 50%;
+  top: 50%;
 }
 
 #save-modal {

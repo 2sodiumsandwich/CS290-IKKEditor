@@ -4,8 +4,9 @@ var fs = require('fs');
 var htmlLink = fs.readFileSync('public/index.html');
 var galleryLink = fs.readFileSync('public/gallery.html');
 var jsLink = fs.readFileSync('public/gallery.js');
-var jsLink1 = fs.readFileSync('public/decoration.js')
-var jsLink2 = fs.readFileSync('public/editor.js')
+var jsLink1 = fs.readFileSync('public/scripts/decoration.js')
+var jsLink2 = fs.readFileSync('public/scripts/editor.js')
+var editorUIlink = fs.readFileSync('public/scripts/editor-ui.js')
 var cssLink = fs.readFileSync('public/style.css');
 var errorLink = fs.readFileSync('public/404.html');
 
@@ -55,6 +56,12 @@ function requestHandler(req, res) {
             "Content-Type": "text/javascript"
         });
         res.write(jsLink1);
+    }
+    else if (req.url == '/editor-ui.js') {
+        res.writeHead(200, {
+            "Content-Type": "text/javascript"
+        });
+        res.write(editorUIlink);
     }
     else if (req.url == '/sticker-imgs/bow.png') {
         res.writeHead(200, {
@@ -106,7 +113,7 @@ function requestHandler(req, res) {
     }
     else if (req.url == '/editor.js') {
         res.writeHead(200, {
-            "Content-Type": "text/js"
+            "Content-Type": "text/javascript"
         });
         res.write(jsLink2);
     }

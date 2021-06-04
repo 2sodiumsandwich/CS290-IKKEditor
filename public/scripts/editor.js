@@ -395,8 +395,6 @@ reset();
 $(function() {
     //draggable() from jquery UI lib, makes things draggable.
     //TODO make stuff not draggable off screen
-    $('#adjustment-tool-bar, #paint-tool-bar, #save-modal, #delete-modal, #decoration-tool-bar').draggable();
-
     $('#upload-photo-button').change(function(e) {
         let imagefile = e.target.files[0];
         let fr = new FileReader();
@@ -438,126 +436,7 @@ $(function() {
         }
     })
 
-    /**
-     * Crop
-     */
- 
-    $("#crop-toggle").click(() => {
-        cropping = !cropping;
-        paint = false;
-        is_erasing = false;
-        sticker_toggle = false;
-    })
-    /**
-     * Paint stuff
-     */
-
-
- 
-    $('#paint-toggle').click(() => {
-        $('#paint-tool-bar').toggle();
-    })
-
-
-    $('#paint-button').click(() => {
-        paint = !paint;
-        is_erasing = false;
-        cropping = false;
-        sticker_toggle = false;
-    });
-
-    $('#erase-button').click(() => {
-        is_erasing = !is_erasing;
-        paint = false;
-        cropping = false;
-        sticker_toggle = false;
-    });
-
-    $('#color-picker').on('change', function (e) {
-        draw_color = $(this).val(); 
-    })
-
-    $('#paint-slider').on('input', function (e) {
-        draw_width = e.target.value == 0 ? 1 : e.target.value;
-    })
-
-    $('#eraser-slider').on('input', function (e) {
-    erase_width = e.target.value;
-    })
-
-    /**
-     * Adjustment stuff
-     */
-
-    $('#adjustment-toggle').click(() => {
-        $('#adjustment-tool-bar').toggle();
-    })
-
-    $('#brightness-slider').on('input', function (e) {
-        brightness = (e.target.value - 50)/50 * 128; //turns 0-100 val into an 8 bit val fo calclatodsnd
-        saturation_toggle = false
-        if(active) draw();
-    })
-
-    $('#contrast-slider').on('input', function (e) {
-        contrast = (e.target.value - 50)/50 * 128; // same as abv
-        saturation_toggle = false;
-        if(active) draw();
-    })
-
-    //The change listeners are here for the sake of making draw more streamline, so saturation only applies once per change and doesn't freeze.
-    $('#brightness-slider').on('change', function (e) {
-    // brightness = (e.target.value - 50)/50 * 128; //turns 0-100 val into an 8 bit val fo calclatodsnd
-        saturation_toggle = true
-        snapshot();
-        if(active) draw();
-    })
-
-    $('#contrast-slider').on('change', function (e) {
-    //  contrast = (e.target.value - 50)/50 * 128; // same as abv
-        saturation_toggle = true;
-        snapshot();
-        if(active) draw();
-    })
-
-    $('#saturation-slider').on('change', function (e) {
-        saturation = (e.target.value / 50); //sat is on a scale of 0-2, 1 being default
-        saturation_toggle = true;
-        if(active) draw();
-        snapshot();
-    })
-
-    /**
-     *  Undo / Redo
-     */
-
-    $('#undo').click(() => {
-        undo();
-    })
-
-    $('#redo').click(() => {
-        redo()
-    })
-
-    /**
-     * Save stuff
-     */
-
-    $('#save-button, .save-modal-close').click(() => {
-        if(active) {
-            $('#save-modal').toggle();
-        } else {
-            alert("Canvas is blank");
-        }
-    })
-
-    $('.delete-button, .delete-button-close').click(() => {
-        if(active) {
-            $('#delete-modal').toggle();
-        } else {
-            alert("Canvas is blank");
-        }
-    })
+    
 
     $('#delete-button-accept').click(() => {
         //clear canvas, reset other variables here too
@@ -626,11 +505,5 @@ $(function() {
     });  
 });
 
-$('#decoration-toggle').click(() => {
-    $('#decoration-tool-bar').toggle();
-    sticker_toggle != sticker_toggle;
-    paint = false;
-    cropping = false;
-    is_erasing = false;
-})
+
 

@@ -1,6 +1,9 @@
 <!DOCTYPE html>
 <html>
   <head>
+    <script src="https://www.gstatic.com/firebasejs/8.6.2/firebase-app.js"></script> 
+    <script src="https://www.gstatic.com/firebasejs/8.6.2/firebase-firestore.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.6.2/firebase-storage.js"></script>
 
     <meta charset="utf-8">
     <title>IKKEditor</title>
@@ -12,23 +15,15 @@
 
     <link rel="stylesheet" href="style.css" media="screen">
 
-    <!-- The core Firebase JS SDK is always required and must be listed first -->
-    <script src="https://www.gstatic.com/firebasejs/8.6.2/firebase-app.js"></script>
-    <script src="https://www.gstatic.com/firebasejs/8.6.2/firebase-firestore.js"></script>
-    <script src="https://www.gstatic.com/firebasejs/8.6.2/firebase-storage.js"></script>
-
-
   </head>
 
   <body>
-
+    
     {{> header }}
 
- 
     <main>
       <article class="menu-button-container">
         <button type="button" id="paint-toggle" class="menu-button"><i class="fas fa-paint-brush"></i><p>Paint</p></button>
-        <button type="button" id="decoration-toggle" class="menu-button"><i class="fas fa-holly-berry"></i><p>Decoration</p></button>
         <button type="button" id="adjustment-toggle" class="menu-button"><i class="fas fa-sliders-h"></i><p>Adjustment</p></button>
         <button type="button" id="crop-toggle" class="menu-button"><i class="fas fa-crop-alt"></i><p>Crop</p></button>
         <button type="button" id="save-button" class="menu-button"><i class="far fa-save"></i><p>Save</p></button>
@@ -39,14 +34,9 @@
     <!-- <div id="modal-backdrop" class="hidden"></div> -->
 <!-- The sections below are about the functions of each menu -->
     <div>
-      
       <canvas id="photo-canvas" width="960" height="540">
         <!-- This field is for the user's photo. Need javascript. -->
       </canvas>
-      <canvas id="drawing-canvas" width="960" height="540">
-        <!-- This field is for the user's photo. Need javascript. -->
-      </canvas>
-      
     </div>
 
     <button class="upload-button-container">
@@ -62,25 +52,21 @@
       <div class="tool-bar-header">
         <p>Paint Tool</p>
       </div>
-      <input type="color" id="color-picker" name="paint-color">
+      <input type="color" id="color-picker" name="paint-color" value="#000000">
 
       <div class="paint-function">
-        <button id="paint-button" type="button"><i class="fas fa-brush"></i><p>Brush</p></button>
+        <button type="button"><i class="fas fa-brush"></i><p>Brush</p></button>
         <div>
           <label for="brush-size">Brush Size</label>
-          
-          <input name="brush-size" id="paint-slider" type="range" min="0" max="200" value="10" step="1" data-highlight="true">
-
+          <input name="brush-size" id="slider-fill" type="range" min="0" max="200" value="10" step="1" data-highlight="true">
         </div>
       </div>
 
       <div class="paint-function">
-        <button id="erase-button" type="button"><i class="fas fa-eraser"></i><p>Eraser</p></button>
+        <button type="button"><i class="fas fa-eraser"></i><p>Eraser</p></button>
         <div>
           <label for="eraser-size">Eraser Size</label>
-
-          <input name="eraser-size" id="eraser-slider" type="range" min="0" max="200" value="10" step="1" data-highlight="true">
-
+          <input name="eraser-size" id="slider-fill" type="range" min="0" max="200" value="10" step="1" data-highlight="true">
         </div>
       </div>
 
@@ -109,31 +95,13 @@
       <div class="adjust-saturation">
         <div>
           <label for="contrast"><i class="fas fa-tint"></i> Saturation</label>
-          <input name="contrast" id="saturation-slider" onInput= "sat_slider_val = this.value" type="range" min="0" max="100" value="50" step="1" >
+          <input name="contrast" id="saturation-slider" type="range" min="0" max="100" value="50" step="1">
         </div>
       </div>
 
     </div>
 
-
-    <!-- 3. Decoration tool -->
-    <div id="decoration-tool-bar" class="tool-bar" hidden>
-
-      <div class="stickers-container">
-        <div class="tool-bar-header">
-          <p>Decorations</p>
-        </div>
-        <button id="heart-button" type="button" class="sticker-button"><img src="./sticker-imgs/heart.png" alt="Heart"></button>
-        <button id="bow-button" type="button" class="sticker-button"><img src="./sticker-imgs/bow.png" alt="Bow"></button>
-        <button id="cake-button" type="button" class="sticker-button"><img src="./sticker-imgs/cake.png" alt="Cake"></button>
-        <button id="flower-button" type="button" class="sticker-button"><img src="./sticker-imgs/flower.png" alt="Flower"></button>
-        <button id="monkey-button" type="button" class="sticker-button"><img src="./sticker-imgs/monkey.png" alt="Monkey"></button>
-        <button id="rice-button" type="button" class="sticker-button"><img src="./sticker-imgs/rice-ball.png" alt="Rice Ball"></button>
-        <button id="sparkles-button" type="button" class="sticker-button"><img src="./sticker-imgs/sparkles.png" alt="Sparkles"></button>
-        <button id="micheal-button" type="button" class="sticker-button"><img src="./sticker-imgs/micheal.png" alt="Micheal"></button>
-      </div>
-    </div>
-<!-- 4. Save Modal -->
+<!-- 3. Save Modal -->
 <div id="save-modal" hidden>
 
   <div class="modal-header">
@@ -163,7 +131,7 @@
   </div>
 
 </div>
-<!-- 5. Delete Modal -->
+<!-- 4. Delete Modal -->
 <div id="delete-modal" hidden>
 
   <div class="modal-header">
@@ -181,34 +149,9 @@
 
 </div>
 
-<!-- 6. undo/redo Modal -->
-<div class="do-button-container">
-  <button type="button" id="undo" class="do-button"><i class="fas fa-undo-alt"></i><p>Undo</p></button>
-  <button type="button" id="redo" class="do-button"><i class="fas fa-redo-alt"></i><p>Redo</p></button>
-</div>
-
-<!-- 7. Error prompt -->
-<div class="error-prompt" hidden>
-  <div class="modal-header">
-    <p><i class="fas fa-exclamation"></i></p>
-  </div>
-  <div class="prompt-body">
-    <p>Please select a file.</p>
-    <button id="error-accept" type="button" class="modal-button cancel">Close</button>
-  </div>
-</div>
-
 <script src="https://code.jquery.com/jquery-3.6.0.js"></script>
 <script src="http://code.jquery.com/ui/jquery-ui-git.js"></script>
-
-<script src="scripts/undo_redo.js"></script>
 <script src="editor.js"></script>
-<script src="scripts/paint.js"></script>
-<script src="scripts/editor-ui.js"></script>
-<script src="scripts/decoration.js"></script>
-<script src="scripts/adjustments.js"></script>
-<script src="scripts/cropping.js"></script>
-
 
   </body>
 </html>

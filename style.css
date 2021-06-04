@@ -279,6 +279,14 @@ button p {
   box-shadow: 1px 1px 5px #919090;
 }
 
+#drawing-canvas {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  margin: -250px 0px 0px -480px;
+  box-shadow: 1px 1px 5px #919090;
+}
+
 #paint-tool-bar {
   position: absolute;
   left: 50%;
@@ -335,10 +343,6 @@ button p {
   margin: 5px 0px 5px 0px;
 }
 
-#slider-fill {
-
-}
-
 #save-modal {
   position: absolute;
   top: 50%;
@@ -385,4 +389,34 @@ button p {
   right: 0;
   z-index: 1000;
   background-color: rgba(0, 0, 0, 0.45);
+}
+
+.do-button {
+  background-color: #E47D78;
+  width: 120px;
+  height: 60px;
+  border-radius: 15px;
+  border: 0px;
+  color: white;
+  cursor: pointer;
+  margin: 5px;
+}
+
+.do-button:hover {
+  background-color: #D96E69;
+}
+
+.do-button:active {
+  background-color: #D63C3E;
+}
+
+.do-button-container {
+  display: flex;
+  flex-wrap: wrap;
+  flex-direction: row;
+  justify-content: center;
+  position: absolute;
+  top: 50%;
+  left: 40%;
+  margin: 300px 0px 0px 40px;
 }

@@ -40,9 +40,14 @@
     <!-- <div id="modal-backdrop" class="hidden"></div> -->
 <!-- The sections below are about the functions of each menu -->
     <div>
+      
       <canvas id="photo-canvas" width="960" height="540">
         <!-- This field is for the user's photo. Need javascript. -->
       </canvas>
+      <canvas id="drawing-canvas" width="960" height="540">
+        <!-- This field is for the user's photo. Need javascript. -->
+      </canvas>
+      
     </div>
 
     <button class="upload-button-container">
@@ -58,21 +63,25 @@
       <div class="tool-bar-header">
         <p>Paint Tool</p>
       </div>
-      <input type="color" id="color-picker" name="paint-color" value="#000000">
+      <input type="color" id="color-picker" name="paint-color">
 
       <div class="paint-function">
-        <button type="button"><i class="fas fa-brush"></i><p>Brush</p></button>
+        <button id="paint-button" type="button"><i class="fas fa-brush"></i><p>Brush</p></button>
         <div>
           <label for="brush-size">Brush Size</label>
-          <input name="brush-size" id="slider-fill" type="range" min="0" max="200" value="10" step="1" data-highlight="true">
+          
+          <input name="brush-size" id="paint-slider" type="range" min="0" max="200" value="10" step="1" data-highlight="true">
+
         </div>
       </div>
 
       <div class="paint-function">
-        <button type="button"><i class="fas fa-eraser"></i><p>Eraser</p></button>
+        <button id="erase-button" type="button"><i class="fas fa-eraser"></i><p>Eraser</p></button>
         <div>
           <label for="eraser-size">Eraser Size</label>
-          <input name="eraser-size" id="slider-fill" type="range" min="0" max="200" value="10" step="1" data-highlight="true">
+
+          <input name="eraser-size" id="eraser-slider" type="range" min="0" max="200" value="10" step="1" data-highlight="true">
+
         </div>
       </div>
 
@@ -101,7 +110,7 @@
       <div class="adjust-saturation">
         <div>
           <label for="contrast"><i class="fas fa-tint"></i> Saturation</label>
-          <input name="contrast" id="saturation-slider" type="range" min="0" max="100" value="50" step="1">
+          <input name="contrast" id="saturation-slider" onInput= "sat_slider_val = this.value" type="range" min="0" max="100" value="50" step="1" >
         </div>
       </div>
 
@@ -153,6 +162,12 @@
     <button type="button" class="modal-button cancel delete-button-close">Cancel</button>
   </div>
 
+</div>
+
+<!-- 6. undo/redo Modal -->
+<div class="do-button-container">
+  <button type="button" id="undo" class="do-button"><i class="fas fa-undo-alt"></i><p>Undo</p></button>
+  <button type="button" id="redo" class="do-button"><i class="fas fa-redo-alt"></i><p>Redo</p></button>
 </div>
 
 <script src="https://code.jquery.com/jquery-3.6.0.js"></script>

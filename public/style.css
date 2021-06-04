@@ -33,7 +33,7 @@ nav ul li {
   margin-right: 15px;
 }
 
-.navlist {
+.menulist {
   color: white;
   position: fixed;
   margin: 0px;
@@ -41,7 +41,7 @@ nav ul li {
   right: 1%;
 }
 
-.navitem {
+.menuitem {
   padding-bottom: 8px;
 }
 
@@ -49,7 +49,7 @@ nav ul li {
   box-shadow: inset 0 -3px white;
 }
 
-.navlist li {
+.menulist li {
   float: left;
 }
 
@@ -508,7 +508,6 @@ button p {
   border-radius: 15px;
   box-shadow: 1px 1px 5px #919090;
   z-index: 1010;
-  display: none;
 }
 
 #save-modal .modal-body {
@@ -531,7 +530,6 @@ button p {
   border-radius: 15px;
   box-shadow: 1px 1px 5px #919090;
   z-index: 1010;
-  display: none;
 }
 
 #delete-modal > div:nth-child(2) {

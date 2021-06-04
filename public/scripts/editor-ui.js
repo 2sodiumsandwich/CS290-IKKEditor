@@ -6,13 +6,21 @@ $(function() {
     $('#adjustment-tool-bar, #paint-tool-bar, #save-modal, #delete-modal, #decoration-tool-bar').draggable();
 
     $('#paint-toggle').click(() => {
-        $('#paint-tool-bar').toggle();
-        $('#paint-tool-bar').css('z-index', zindex += 1);
+        if(!active) {
+            $('.error-prompt').show();
+        } else {
+            $('#paint-tool-bar').toggle();
+            $('#paint-tool-bar').css('z-index', zindex += 1);
+        }
     })
 
     $('#adjustment-toggle').click(() => {
-        $('#adjustment-tool-bar').toggle();
-        $('#adjustment-tool-bar').css('z-index', zindex += 1);
+        if(!active) {
+            $('.error-prompt').show();
+        } else {
+            $('#adjustment-tool-bar').toggle();
+            $('#adjustment-tool-bar').css('z-index', zindex += 1);
+        }
     })
 
     //Moving active tool bars to the front
@@ -24,19 +32,27 @@ $(function() {
     })
 
     $('#decoration-toggle').click(() => {
-        $('#decoration-tool-bar').toggle();
-        $('#decoration-tool-bar').css('z-index', zindex += 1);
-        sticker_toggle != sticker_toggle;
-        paint = false;
-        cropping = false;
-        is_erasing = false;
+        if(!active) {
+            $('.error-prompt').show();
+        } else {
+            $('#decoration-tool-bar').toggle();
+            $('#decoration-tool-bar').css('z-index', zindex += 1);
+            sticker_toggle != sticker_toggle;
+            paint = false;
+            cropping = false;
+            is_erasing = false;
+        }
     })
 
     $("#crop-toggle").click(() => {
-        cropping = !cropping;
-        paint = false;
-        is_erasing = false;
-        sticker_toggle = false;
+        if(!active) {
+            $('.error-prompt').show();
+        } else {
+            cropping = !cropping;
+            paint = false;
+            is_erasing = false;
+            sticker_toggle = false;
+        }
     })
 
     $('#paint-button').click(() => {
@@ -71,19 +87,19 @@ $(function() {
     })
 
     $('#save-button, .save-modal-close').click(() => {
-        if(active) {
-            $('#save-modal').toggle();
+        if(!active) {
+            $('.error-prompt').show();
         } else {
-            alert("Canvas is blank");
+            $('#save-modal').toggle();
         }
     })
 
     $('.delete-button, .delete-button-close').click(() => {
-        if(active) {
-            $('#delete-modal').toggle();
+        if(!active) {
+            $('.error-prompt').show();
         } else {
-            alert("Canvas is blank");
-        }
+            $('#delete-modal').toggle();
+        } 
     })
 
     /**
@@ -133,5 +149,13 @@ $(function() {
 
     $('#redo').click(() => {
         redo()
+    })
+
+    /**
+     *  Error prompt
+     */
+
+    $('#error-accept').click(() => {
+        $('.error-prompt').toggle();
     })
 })

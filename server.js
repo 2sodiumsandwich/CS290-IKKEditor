@@ -1,167 +1,90 @@
-var http = require("http");
-var fs = require('fs');
+/*
+ * Write your routing code in this file.  Make sure to add your name and
+ * @oregonstate.edu email address below.
+ *
+ * Name:
+ * Email:
+ */
 
-var htmlLink = fs.readFileSync('public/index.html');
-var galleryLink = fs.readFileSync('public/gallery.html');
-var jsLink = fs.readFileSync('public/gallery.js');
-var jsLink1 = fs.readFileSync('public/scripts/decoration.js');
-var jsLink2 = fs.readFileSync('public/scripts/editor.js');
-var editorUIlink = fs.readFileSync('public/scripts/editor-ui.js');
-var paintLink = fs.readFileSync('public/scripts/paint.js');
-var adjustmentLink = fs.readFileSync('public/scripts/adjustments.js');
-var undoLink = fs.readFileSync('public/scripts/undo_redo.js');
-var croppingLink = fs.readFileSync('public/scripts/cropping.js');
-var cssLink = fs.readFileSync('public/style.css');
-var errorLink = fs.readFileSync('public/404.html');
+var path = require('path');
+var express = require('express');
 
+var app = express();
+var port = process.env.PORT || 3000;
+const ViewEngine = require("express-handlebars");
 
-var bow = fs.readFileSync('public/sticker-imgs/bow.png');
-var cake = fs.readFileSync('public/sticker-imgs/cake.png');
-var flower = fs.readFileSync('public/sticker-imgs/flower.png');
-var heart = fs.readFileSync('public/sticker-imgs/heart.png');
-var micheal = fs.readFileSync('public/sticker-imgs/micheal.png');
-var monkey = fs.readFileSync('public/sticker-imgs/monkey.png');
-var riceball = fs.readFileSync('public/sticker-imgs/rice-ball.png');
-var sparkles = fs.readFileSync('public/sticker-imgs/sparkles.png');
+function basicPages(req, res, next) {
+  var pagenum = null;
+  if (req.url === "/") {
+    pagenum = 0;
+  }
+  else if (req.params.nav) {
+    switch (req.params.nav.toLowerCase()) {
+      case "home":
+        pagenum = 0;
+        break;
+      case "gallery":
+        pagenum = 1;
+        req["gallery"] = -1;
+        break;
+      default:
+        pagenum = -1;
+        req["404"] = -1;
+        break;
+    }
+  }
+  else {
+    pagenum = -5;
+  }
 
-console.log("PORT:", process.env.PORT);
+  const navs = [{ str: "Home" }, { str: "Gallery" }];
+  if (pagenum > -1) {
+    navs[pagenum].active = true;
+  }
+  req.handlebarnav = navs;
 
-function requestHandler(req, res) {
-    console.log("method:", req.method);
-    console.log("url:", req.url);
-    console.log("headers:", req.headers);
-
-    if ((req.url == '/index.html') || (req.url == '/')) {
-        res.writeHead(200, {
-            "Content-Type": "text/html"
-        });
-        res.write(htmlLink);
-    }
-    else if (req.url == '/gallery.html') {
-        res.writeHead(200, {
-            "Content-Type": "text/html"
-        });
-        res.write(galleryLink);
-    }
-    else if (req.url == '/style.css') {
-        res.writeHead(200, {
-            "Content-Type": "text/css"
-        });
-        res.write(cssLink);
-    }
-    else if (req.url == '/gallery.js') {
-        res.writeHead(200, {
-            "Content-Type": "text/javascript"
-        });
-        res.write(jsLink);
-    }
-    else if (req.url == '/decoration.js') {
-        res.writeHead(200, {
-            "Content-Type": "text/javascript"
-        });
-        res.write(jsLink1);
-    }
-    else if (req.url == '/undo_redo.js') {
-        res.writeHead(200, {
-            "Content-Type": "text/javascript"
-        });
-        res.write(undoLink);
-    }
-    else if (req.url == '/cropping.js') {
-        res.writeHead(200, {
-            "Content-Type": "text/javascript"
-        });
-        res.write(croppingLink);
-    }
-    else if (req.url == '/paint.js') {
-        res.writeHead(200, {
-            "Content-Type": "text/javascript"
-        });
-        res.write(paintLink);
-    }
-    else if (req.url == '/adjustments.js') {
-        res.writeHead(200, {
-            "Content-Type": "text/javascript"
-        });
-        res.write(adjustmentLink);
-    }
-    else if (req.url == '/editor-ui.js') {
-        res.writeHead(200, {
-            "Content-Type": "text/javascript"
-        });
-        res.write(editorUIlink);
-    }
-    else if (req.url == '/sticker-imgs/bow.png') {
-        res.writeHead(200, {
-            "Content-Type": "image/jpeg"
-        });
-        res.write(bow)
-    }
-    else if (req.url == '/sticker-imgs/cake.png') {
-        res.writeHead(200, {
-            "Content-Type": "image/jpeg"
-        });
-        res.write(cake)
-    }
-    else if (req.url == '/sticker-imgs/flower.png') {
-        res.writeHead(200, {
-            "Content-Type": "image/jpeg"
-        });
-        res.write(flower)
-    }
-    else if (req.url == '/sticker-imgs/heart.png') {
-        res.writeHead(200, {
-            "Content-Type": "image/jpeg"
-        });
-        res.write(heart)
-    }
-    else if (req.url == '/sticker-imgs/micheal.png') {
-        res.writeHead(200, {
-            "Content-Type": "image/jpeg"
-        });
-        res.write(micheal)
-    }
-    else if (req.url == '/sticker-imgs/monkey.png') {
-        res.writeHead(200, {
-            "Content-Type": "image/jpeg"
-        });
-        res.write(monkey)
-    }
-    else if (req.url == '/sticker-imgs/rice-ball.png') {
-        res.writeHead(200, {
-            "Content-Type": "image/jpeg"
-        });
-        res.write(riceball)
-    }
-    else if (req.url == '/sticker-imgs/sparkles.png') {
-        res.writeHead(200, {
-            "Content-Type": "image/jpeg"
-        });
-        res.write(sparkles)
-    }
-    else if (req.url == '/editor.js') {
-        res.writeHead(200, {
-            "Content-Type": "text/javascript"
-        });
-        res.write(jsLink2);
-    }
-    else if (req.url == '/404.html') {
-        res.writeHead(200, {
-            "Content-Type": "text/html"
-        });
-        res.write(errorLink);
-    }
-    else {
-        res.writeHead(404, {
-            "Content-Type": "text/html"
-        });
-        res.write(errorLink);
-    }
-    res.end();
+  next();
+  return;
 }
 
-var server = http.createServer(requestHandler);
+app.engine('handlebars', ViewEngine());
+app.set('view engine', 'handlebars');
+app.get("/", basicPages, function (req, res, next) {
 
-server.listen(3000, function (err) {
-    console.log("Server is on port 3000");
+  res.status(200).render("index", {
+    navlinks: req.handlebarnav,
+    layout: false
+  })
+  return;
+});
+app.get('/:nav', basicPages, function (req, res, next) {
+
+  if (req["404"] === -1) {
+    next();
+    return;
+  }
+  else if(req["gallery"] === -1){
+      res.status(200).render('gallery',{
+          navlinks: req.handlebarnav,
+          layout: false
+      })
+      return;
+  }
+  res.status(200).render("index", {
+    navlinks: req.handlebarnav,
+    layout: false
+  })
+  return;
+})
+app.use(express.static('public'));
+
+app.get('*', basicPages, function (req, res) {
+  res.status(404).render('404', {
+    navlinks: req.handlebarnav,
+    layout: false
+  })
+});
+
+app.listen(port, function () {
+  console.log("== Server is listening on port", port);
 });

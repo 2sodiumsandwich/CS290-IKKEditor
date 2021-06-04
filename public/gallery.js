@@ -14,12 +14,21 @@ var db = firebase.firestore();
 var images = document.getElementsByClassName("image-button");
 var storage = firebase.storage();
 var listRef = storage.ref().child("pics");
-var pictures = [];
 var imagedata = [];
+var docidlist = [];
+
+function insertNewImage() {
+  var newimage = Handlebars.templates.image({})
+
+  var photoContainer = document.querySelector('main.photo-container');
+  photoContainer.insertAdjacentHTML("beforeend", newimage)
+}
 
 db.collection("photoStor").get().then((querySnapshot) => {
   querySnapshot.forEach((doc) => {
+    docidlist.push(doc.id);
     imagedata.push(doc.data());
+    insertNewImage();
     //var gsReference = storage.refFromURL(imageurl);
   });
 
@@ -34,7 +43,7 @@ db.collection("photoStor").get().then((querySnapshot) => {
   }
 }).then(() => {
   imagedata.forEach((currentDoc, i) => {
-    itemRef = storage.refFromURL(currentDoc["image-url"]);
+    itemRef = storage.refFromURL(currentDoc.imageurl);
     itemRef.getDownloadURL().then((url) => {
       console.log(url);
       imagedata[i].image = url;
@@ -49,6 +58,7 @@ function closeModal() {
   document.getElementById("modal-backdrop").style.display = "none";
 
   document.getElementsByClassName("modal-button accept")[0].id = "none";
+  document.getElementsByClassName("modal-button accept")[1].id = "none";
 }
 
 function downloadImage(id) {
@@ -70,11 +80,21 @@ function downloadImage(id) {
 }
 
 function openImage(id) {
-  //print everything in imageurl[id]
+  //print everything in imagedata[id]
+  console.log(imagedata);
   document.getElementById("author").innerHTML = imagedata[id].author;
   document.getElementById("title").innerHTML = imagedata[id].title;
   document.getElementById("description").innerHTML = imagedata[id].description;
   document.getElementById("image").setAttribute('src', imagedata[id].image);
 
   document.getElementsByClassName("modal-button accept")[0].id = id;
+  document.getElementsByClassName("modal-button accept")[1].id = id;
+}
+
+function deleteImage(id){
+  console.log(docidlist[id]);
+  db.collection("photoStor").doc(docidlist[id]).delete().then(()=>{
+    console.log("Document deleted");
+    window.location.reload();
+  });
 }

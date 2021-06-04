@@ -1,3 +1,14 @@
+var firebaseConfig = {
+    apiKey: "AIzaSyD8dBeEkJ_T9MXoobgEJYLDYnxtTJ7N3K0",
+    authDomain: "cs290-ikkeditor.firebaseapp.com",
+    projectId: "cs290-ikkeditor",
+    storageBucket: "cs290-ikkeditor.appspot.com",
+    messagingSenderId: "1091468535905",
+    appId: "1:1091468535905:web:8d1ee2b54193b3f362e220"
+};
+// Initialize Firebase
+firebase.initializeApp(firebaseConfig);
+
 var canvas = document.getElementById("photo-canvas");
 var ctx = canvas.getContext('2d');
 
@@ -128,10 +139,27 @@ $(function() {
                 tempCtx3.drawImage(imageObj2, canX, canY, imageWidth, imageHeight);
                 final_image = tempCanvas3.toDataURL("image/png");
                 
-                let da = document.createElement('a');
-                da.href = final_image
-                da.download = "gaming.png";
-                da.click();
+                const ref = firebase.storage().ref();
+
+                const title = document.getElementById("title-text-input").value;
+                const author = document.getElementById("name-text-input").value;
+                ref.child('pics/' + author + '-' + title).putString(final_image, 'data_url').then(function (e) {
+                    console.log("uploaded data_url string");
+                    alert("image uploaded");
+                }).then(() => {
+                    ref.child('pics/' + author + '-' + title).getDownloadURL().then((urllink) => {
+                        var db = firebase.firestore();
+                        db.collection("photoStor").add({
+                            author: document.getElementById("name-text-input").value,
+                            description: document.getElementById("desc-text-input").value,
+                            imageurl: urllink,
+                            title: document.getElementById("title-text-input").value
+                        }).then((docRef) => {
+                            console.log("Document written with ID: ", docRef.id);
+                        })
+                    })
+                });
+                
             }
         }
 

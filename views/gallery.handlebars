@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <!-- The core Firebase JS SDK is always required and must be listed first -->
+  <script src="https://www.gstatic.com/firebasejs/8.6.2/firebase-app.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/8.6.2/firebase-firestore.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/8.6.2/firebase-storage.js"></script>
+
+  <meta charset="utf-8">
+  <title>IKKEditor</title>
+
+  <!-- Fontfamily -->
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@100;400&display=swap" rel="stylesheet">
+
+  <!-- Icon -->
+  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.15.3/css/all.css" crossorigin="anonymous">
+
+  <link rel="stylesheet" href="style.css" media="screen">
+
+  <script src="/gallery.js" charset="utf-8" defer></script>
+  <script src="/image.js" type="application/javascript" charset="utf-8" defer></script>
+  <script src="https://cdn.jsdelivr.net/npm/handlebars@latest/dist/handlebars.runtime.js"></script>
+</head>
+{{> header }}
+
+<body>
+  <main class="photo-container">
+    {{#each images}}
+    {{> image}}
+    {{/each}}
+  </main>
+
+  {{> gmodal}}
+
+</body>
+
+</html>

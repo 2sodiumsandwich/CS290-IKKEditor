@@ -4,9 +4,13 @@ var fs = require('fs');
 var htmlLink = fs.readFileSync('public/index.html');
 var galleryLink = fs.readFileSync('public/gallery.html');
 var jsLink = fs.readFileSync('public/gallery.js');
-var jsLink1 = fs.readFileSync('public/scripts/decoration.js')
-var jsLink2 = fs.readFileSync('public/scripts/editor.js')
-var editorUIlink = fs.readFileSync('public/scripts/editor-ui.js')
+var jsLink1 = fs.readFileSync('public/scripts/decoration.js');
+var jsLink2 = fs.readFileSync('public/scripts/editor.js');
+var editorUIlink = fs.readFileSync('public/scripts/editor-ui.js');
+var paintLink = fs.readFileSync('public/scripts/paint.js');
+var adjustmentLink = fs.readFileSync('public/scripts/adjustments.js');
+var undoLink = fs.readFileSync('public/scripts/undo_redo.js');
+var croppingLink = fs.readFileSync('public/scripts/cropping.js');
 var cssLink = fs.readFileSync('public/style.css');
 var errorLink = fs.readFileSync('public/404.html');
 
@@ -56,6 +60,30 @@ function requestHandler(req, res) {
             "Content-Type": "text/javascript"
         });
         res.write(jsLink1);
+    }
+    else if (req.url == '/undo_redo.js') {
+        res.writeHead(200, {
+            "Content-Type": "text/javascript"
+        });
+        res.write(undoLink);
+    }
+    else if (req.url == '/cropping.js') {
+        res.writeHead(200, {
+            "Content-Type": "text/javascript"
+        });
+        res.write(croppingLink);
+    }
+    else if (req.url == '/paint.js') {
+        res.writeHead(200, {
+            "Content-Type": "text/javascript"
+        });
+        res.write(paintLink);
+    }
+    else if (req.url == '/adjustments.js') {
+        res.writeHead(200, {
+            "Content-Type": "text/javascript"
+        });
+        res.write(adjustmentLink);
     }
     else if (req.url == '/editor-ui.js') {
         res.writeHead(200, {

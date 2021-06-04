@@ -2,6 +2,7 @@ $(function() {
     /**
      * Toolbar toggles / functions
      */
+    //Making tool bars draggable.
     $('#adjustment-tool-bar, #paint-tool-bar, #save-modal, #delete-modal, #decoration-tool-bar').draggable();
 
     $('#paint-toggle').click(() => {
@@ -14,10 +15,10 @@ $(function() {
         $('#adjustment-tool-bar').css('z-index', zindex += 1);
     })
 
+    //Moving active tool bars to the front
     let zindex = 1;
 
     $('.tool-bar').css('z-index', '0');
-
     $('.tool-bar').mousedown(function(e) {
         $(this).css('z-index', zindex += 1);
     })
@@ -60,12 +61,13 @@ $(function() {
         draw_color = $(this).val(); 
     })
 
+    //if brush size = 0, things break
     $('#paint-slider').on('input', function (e) {
         draw_width = e.target.value == 0 ? 1 : e.target.value;
     })
 
     $('#eraser-slider').on('input', function (e) {
-        erase_width = e.target.value;
+        erase_width = e.target.value == 0 ? 1 : e.target.value;
     })
 
     $('#save-button, .save-modal-close').click(() => {
@@ -89,30 +91,29 @@ $(function() {
      **/    
 
     $('#brightness-slider').on('input', function (e) {
-        brightness = (e.target.value - 50)/50 * 128; //turns 0-100 val into an 8 bit val fo calclatodsnd
+        brightness = (e.target.value - 50)/50 * 128; //turns 0-100 val into an 8 bit value for calculations
         saturation_toggle = false
         if(active) draw();
     })
 
     $('#contrast-slider').on('input', function (e) {
-        contrast = (e.target.value - 50)/50 * 128; // same as abv
+        contrast = (e.target.value - 50)/50 * 128; // same as above
         saturation_toggle = false;
         if(active) draw();
     })
 
     //The change listeners are here for the sake of making draw more streamline, so saturation only applies once per change and doesn't freeze.
+    //snapshot() is for undo / redo
     $('#brightness-slider').on('change', function (e) {
-    // brightness = (e.target.value - 50)/50 * 128; //turns 0-100 val into an 8 bit val fo calclatodsnd
         saturation_toggle = true
-        snapshot();
         if(active) draw();
+        snapshot();
     })
 
     $('#contrast-slider').on('change', function (e) {
-    //  contrast = (e.target.value - 50)/50 * 128; // same as abv
         saturation_toggle = true;
-        snapshot();
         if(active) draw();
+        snapshot();
     })
 
     $('#saturation-slider').on('change', function (e) {

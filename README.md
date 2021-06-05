@@ -9,9 +9,9 @@ Editor Features include:
 * Posting to cloud gallery
 
 # Members
-Imgyeong Lee\  
+Imgyeong Lee\
 Kevin Tran\
 Kevin Ng\
-Ethan Ferte\
+Ethan Ferte
 
 

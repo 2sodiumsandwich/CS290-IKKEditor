@@ -1,0 +1,15 @@
+<header>
+    <a href="#">
+        <h1 class="site-title"><i class="fas fa-image"></i>IKKEditor</h1>
+    </a>
+
+    <nav class="menubar">
+        <ul class="menulist">
+            {{#each navlinks}}
+            <li class="menuitem menulink {{#if active}}active{{/if}}">
+            <a href="/{{str}}">{{str}}</a>
+            </li>
+            {{/each}}
+        </ul>
+    </nav>
+</header>

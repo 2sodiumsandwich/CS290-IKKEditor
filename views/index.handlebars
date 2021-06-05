@@ -1,0 +1,225 @@
+<!DOCTYPE html>
+<html>
+  <head>
+
+    <meta charset="utf-8">
+    <title>IKKEditor</title>
+
+    <!-- Fontfamily -->
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@100;400&display=swap" rel="stylesheet">
+    <!-- Icon -->
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.15.3/css/all.css" crossorigin="anonymous">
+
+    <link rel="stylesheet" href="style.css" media="screen">
+
+    <!-- The core Firebase JS SDK is always required and must be listed first -->
+    <script src="https://www.gstatic.com/firebasejs/8.6.2/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.6.2/firebase-firestore.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.6.2/firebase-storage.js"></script>
+
+
+  </head>
+
+  <body>
+
+    {{> header }}
+
+ 
+    <main>
+      <article class="menu-button-container">
+        <button type="button" id="paint-toggle" class="menu-button"><i class="fas fa-paint-brush"></i><p>Paint</p></button>
+        <button type="button" id="decoration-toggle" class="menu-button"><i class="fas fa-holly-berry"></i><p>Decoration</p></button>
+        <button type="button" id="adjustment-toggle" class="menu-button"><i class="fas fa-sliders-h"></i><p>Adjustment</p></button>
+        <button type="button" id="crop-toggle" class="menu-button"><i class="fas fa-crop-alt"></i><p>Crop</p></button>
+        <button type="button" id="save-button" class="menu-button"><i class="far fa-save"></i><p>Save</p></button>
+        <button type="button" class="delete-button"><i class="far fa-trash-alt"></i><p>Delete</p></button>
+      </article>
+    </main>
+
+    <!-- <div id="modal-backdrop" class="hidden"></div> -->
+<!-- The sections below are about the functions of each menu -->
+    <div>
+      
+      <canvas id="photo-canvas" width="960" height="540">
+        <!-- This field is for the user's photo. Need javascript. -->
+      </canvas>
+      <canvas id="drawing-canvas" width="960" height="540">
+        <!-- This field is for the user's photo. Need javascript. -->
+      </canvas>
+      
+    </div>
+
+    <button class="upload-button-container">
+      <input type="file" accept="image/*" id="upload-photo-button" hidden/>
+      <label for="upload-photo-button"><i class="far fa-image"></i><p>Choose file</p></label>
+    </button>
+
+    
+
+<!-- 1. Paint tool -->
+    <div id="paint-tool-bar" class="tool-bar" hidden>
+
+      <div class="tool-bar-header">
+        <p>Paint Tool</p>
+      </div>
+      <input type="color" id="color-picker" name="paint-color">
+
+      <div class="paint-function">
+        <button id="paint-button" type="button"><i class="fas fa-brush"></i><p>Brush</p></button>
+        <div>
+          <label for="brush-size">Brush Size</label>
+          
+          <input name="brush-size" id="paint-slider" type="range" min="0" max="200" value="10" step="1" data-highlight="true">
+
+        </div>
+      </div>
+
+      <div class="paint-function">
+        <button id="erase-button" type="button"><i class="fas fa-eraser"></i><p>Eraser</p></button>
+        <div>
+          <label for="eraser-size">Eraser Size</label>
+
+          <input name="eraser-size" id="eraser-slider" type="range" min="0" max="200" value="10" step="1" data-highlight="true">
+
+        </div>
+      </div>
+
+    </div>
+
+<!-- 2. Adjustment tool -->
+    <div id="adjustment-tool-bar" class="tool-bar" hidden>
+
+      <div class="tool-bar-header">
+        <p>Adjustment Tool</p>
+      </div>
+      <div class="adjust-brightness">
+        <div>
+          <label for="brightness"><i class="fas fa-sun"></i> Brightness</label>
+          <input name="brightness" id="brightness-slider" type="range" min="0" max="100" value="50" step="1">
+        </div>
+      </div>
+
+      <div class="adjust-contrast">
+        <div>
+          <label for="contrast"><i class="fas fa-adjust"></i> Contrast</label>
+          <input name="contrast" id="contrast-slider" type="range" min="0" max="100" value="50" step="1">
+        </div>
+      </div>
+
+      <div class="adjust-saturation">
+        <div>
+          <label for="contrast"><i class="fas fa-tint"></i> Saturation</label>
+          <input name="contrast" id="saturation-slider" onInput= "sat_slider_val = this.value" type="range" min="0" max="100" value="50" step="1" >
+        </div>
+      </div>
+
+    </div>
+
+
+    <!-- 3. Decoration tool -->
+    <div id="decoration-tool-bar" class="tool-bar" hidden>
+
+      <div class="stickers-container">
+        <div class="tool-bar-header">
+          <p>Decorations</p>
+        </div>
+        <button id="heart-button" type="button" class="sticker-button"><img src="./sticker-imgs/heart.png" alt="Heart"></button>
+        <button id="bow-button" type="button" class="sticker-button"><img src="./sticker-imgs/bow.png" alt="Bow"></button>
+        <button id="cake-button" type="button" class="sticker-button"><img src="./sticker-imgs/cake.png" alt="Cake"></button>
+        <button id="flower-button" type="button" class="sticker-button"><img src="./sticker-imgs/flower.png" alt="Flower"></button>
+        <button id="monkey-button" type="button" class="sticker-button"><img src="./sticker-imgs/monkey.png" alt="Monkey"></button>
+        <button id="rice-button" type="button" class="sticker-button"><img src="./sticker-imgs/rice-ball.png" alt="Rice Ball"></button>
+        <button id="sparkles-button" type="button" class="sticker-button"><img src="./sticker-imgs/sparkles.png" alt="Sparkles"></button>
+        <button id="micheal-button" type="button" class="sticker-button"><img src="./sticker-imgs/micheal.png" alt="Micheal"></button>
+      </div>
+    </div>
+<!-- 4. Save Modal -->
+<div id="save-modal" hidden>
+
+  <div class="modal-header">
+    <p>SAVE<button type="button" class="modal-close-button save-modal-close">&times;</button></p>
+  </div>
+
+  <div class="modal-body">
+    <div class="photo-input-element">
+      <label for="title-text-input">Title:</label>
+      <textarea id="title-text-input"></textarea>
+    </div>
+
+    <div class="photo-input-element">
+      <label for="name-text-input">User's name:</label>
+      <textarea id="name-text-input"></textarea>
+    </div>
+
+    <div class="photo-input-element">
+      <label for="desc-text-input">Description:</label>
+      <textarea id="desc-text-input"></textarea>
+    </div>
+  </div>
+
+  <div class="modal-footer">
+    <button type="button" id="save-button-accept" class="modal-button accept">Submit</button>
+    <button type="button" class="modal-button cancel save-modal-close">Cancel</button>
+  </div>
+
+</div>
+<!-- 5. Delete Modal -->
+<div id="delete-modal" hidden>
+
+  <div class="modal-header">
+    <p>DELETE<button type="button" class="modal-close-button delete-button-close">&times;</button></p>
+  </div>
+
+  <div class="modal-body">
+    Are you sure to delete your entire progress?
+  </div>
+
+  <div class="modal-footer">
+    <button type="button" id="delete-button-accept" class="modal-button accept">Yes</button>
+    <button type="button" class="modal-button cancel delete-button-close">Cancel</button>
+  </div>
+
+</div>
+
+<!-- 6. undo/redo Modal -->
+<div class="do-button-container">
+  <button type="button" id="undo" class="do-button"><i class="fas fa-undo-alt"></i><p>Undo</p></button>
+  <button type="button" id="redo" class="do-button"><i class="fas fa-redo-alt"></i><p>Redo</p></button>
+</div>
+
+<!-- 7. Error prompt -->
+<div class="error-prompt" hidden>
+  <div class="modal-header">
+    <p><i class="fas fa-exclamation"></i></p>
+  </div>
+  <div class="prompt-body">
+    <p>Please select a file.</p>
+    <button id="error-accept" type="button" class="modal-button cancel">Close</button>
+  </div>
+</div>
+
+<!-- 8. Success prompt -->
+<div class="success-prompt" hidden>
+  <div class="modal-header">
+    <p><i class="fas fa-cloud-upload-alt"></i></p>
+  </div>
+  <div class="prompt-body">
+    <p>Photo uploaded successfully.</p>
+    <button id="success-accept" type="button" class="modal-button cancel">Close</button>
+  </div>
+</div>
+
+<script src="https://code.jquery.com/jquery-3.6.0.js"></script>
+<script src="http://code.jquery.com/ui/jquery-ui-git.js"></script>
+
+<script src="scripts/undo_redo.js"></script>
+<script src="editor.js"></script>
+<script src="scripts/paint.js"></script>
+<script src="scripts/editor-ui.js"></script>
+<script src="scripts/decoration.js"></script>
+<script src="scripts/adjustments.js"></script>
+<script src="scripts/cropping.js"></script>
+
+
+  </body>
+</html>

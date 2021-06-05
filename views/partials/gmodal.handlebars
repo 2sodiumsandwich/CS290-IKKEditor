@@ -1,0 +1,39 @@
+<div id="modal-backdrop" hidden></div>
+
+<div id="show-up" hidden>
+    <div id="show-up-wrapper">
+        <div id="show-up-photo">
+            <img id="image">
+        </div>
+
+        <div id="description-modal">
+            <div class="modal-header">
+                <p>DESCRIPTION<button type="button" onclick="closeModal()" class="modal-close-button">&times;</button>
+                </p>
+            </div>
+
+            <div class="modal-body">
+                <div class="photo-input-element">
+                    <p class="desc-contents">[Title]</p>
+                    <p id="title">This is a title</p>
+                </div>
+
+                <div class="photo-input-element">
+                    <p class="desc-contents">[User name]</p>
+                    <p id="author">This is a user name</p>
+                </div>
+
+                <div class="photo-input-element">
+                    <p class="desc-contents">[Description]</p>
+                    <p id="description">This is a description</p>
+                </div>
+
+                <div class="modal-footer">
+                    <button type="button" onclick="downloadImage(this.id)" class="modal-button accept">Download</button>
+                    <button type="button" onclick= "deleteImage(this.id)" class="modal-button accept">Delete</button>
+                    <button type="button" onclick="closeModal()" class="modal-button cancel">Close</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

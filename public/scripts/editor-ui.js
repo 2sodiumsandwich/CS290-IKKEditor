@@ -158,4 +158,8 @@ $(function() {
     $('#error-accept').click(() => {
         $('.error-prompt').toggle();
     })
+
+    $('#success-accept').click(() => {
+        $('.success-prompt').toggle();
+    })
 })

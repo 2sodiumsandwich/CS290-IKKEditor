@@ -592,25 +592,16 @@ button p {
   z-index: 1020;
 }
 
-.error-container {
-  margin-top: 50px;
+.success-prompt {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  margin: -70px 0px 0px -220px;
   text-align: center;
-  color: #4F4C4C;
-}
-
-.error-container p{
-  font-size: 100px;
-  margin: 0;
-}
-
-.error-container h2 {
-  margin: 10px 0;
-  font-size: 96px;
-  font-weight: 400;
-}
-
-.error-container h3 {
-  margin-top: 10px 0;
-  font-size: 36px;
-  font-weight: 600;
+  background-color: white;
+  height: 130px;
+  width: 450px;
+  border-radius: 15px;
+  box-shadow: 1px 1px 5px #919090;
+  z-index: 1020;
 }

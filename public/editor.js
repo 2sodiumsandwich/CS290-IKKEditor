@@ -145,7 +145,7 @@ $(function() {
                 const author = document.getElementById("name-text-input").value;
                 ref.child('pics/' + author + '-' + title).putString(final_image, 'data_url').then(function (e) {
                     console.log("uploaded data_url string");
-                    alert("image uploaded");
+                    $('.success-prompt').show();
                 }).then(() => {
                     ref.child('pics/' + author + '-' + title).getDownloadURL().then((urllink) => {
                         var db = firebase.firestore();
@@ -157,12 +157,13 @@ $(function() {
                         }).then((docRef) => {
                             console.log("Document written with ID: ", docRef.id);
                         })
+                        $('#name-text-input, #desc-text-input, #title-text-input').val("");
                     })
                 });
                 
             }
         }
-
+        
         $('#save-modal').toggle();
     });  
 });

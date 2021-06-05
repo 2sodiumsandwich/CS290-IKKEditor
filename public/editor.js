@@ -124,8 +124,8 @@ $(function() {
         var imageObj2 = new Image();
 
         let tempCanvas3 = document.createElement('canvas');
-        tempCanvas3.width = canvas.width;
-        tempCanvas3.height = canvas.height;
+        tempCanvas3.width = imageWidth;
+        tempCanvas3.height = imageHeight;
         let tempCtx3 = tempCanvas3.getContext('2d')
         var final_image;
 
@@ -133,10 +133,10 @@ $(function() {
         imageObj1.src = dataURL1;
         //Both images are drawn on a canvas and the final canvas is saved as an image creating the merge effect
         imageObj1.onload = function() {
-            tempCtx3.drawImage(imageObj1, canX, canY, imageWidth, imageHeight);
+            tempCtx3.drawImage(imageObj1, 0, 0, imageWidth, imageHeight);
             imageObj2.src = dataURL2;
             imageObj2.onload = function () {
-                tempCtx3.drawImage(imageObj2, canX, canY, imageWidth, imageHeight);
+                tempCtx3.drawImage(imageObj2, 0, 0, imageWidth, imageHeight);
                 final_image = tempCanvas3.toDataURL("image/png");
                 
                 const ref = firebase.storage().ref();

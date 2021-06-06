@@ -22,6 +22,7 @@ preload(
 )
 //Select sticker
 $('#heart-button').click(() => {
+    $('#erase-button, #paint-button').removeClass("tool-selected");
     sticker = 0;
     sticker_toggle = true;
     paint = false;
@@ -30,6 +31,7 @@ $('#heart-button').click(() => {
 })
 
 $('#bow-button').click(() => {
+    $('#erase-button, #paint-button').removeClass("tool-selected");
     sticker = 1
     sticker_toggle = true;
     paint = false;
@@ -38,6 +40,7 @@ $('#bow-button').click(() => {
 })
 
 $('#cake-button').click(() => {
+    $('#erase-button, #paint-button').removeClass("tool-selected");
     sticker = 2
     sticker_toggle = true;
     paint = false;
@@ -46,6 +49,7 @@ $('#cake-button').click(() => {
 })
 
 $('#flower-button').click(() => {
+    $('#erase-button, #paint-button').removeClass("tool-selected");
     sticker = 3
     sticker_toggle = true;
     paint = false;
@@ -54,6 +58,7 @@ $('#flower-button').click(() => {
 })
 
 $('#monkey-button').click(() => {
+    $('#erase-button, #paint-button').removeClass("tool-selected");
     sticker = 4
     sticker_toggle = true;
     paint = false;
@@ -62,6 +67,7 @@ $('#monkey-button').click(() => {
 })
 
 $('#rice-button').click(() => {
+    $('#erase-button, #paint-button').removeClass("tool-selected");
     sticker = 5
     sticker_toggle = true;
     paint = false;
@@ -70,6 +76,7 @@ $('#rice-button').click(() => {
 })
 
 $('#sparkles-button').click(() => {
+    $('#erase-button, #paint-button').removeClass("tool-selected");
     sticker = 6
     sticker_toggle = true;
     paint = false;
@@ -78,6 +85,7 @@ $('#sparkles-button').click(() => {
 })
 
 $('#micheal-button').click(() => {
+    $('#erase-button, #paint-button').removeClass("tool-selected");
     sticker = 7
     sticker_toggle = true;
     paint = false;

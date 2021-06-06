@@ -407,17 +407,6 @@ button p {
   background-color: #232222;
 }
 
-.tool-selected {
-  background-color: #161515;
-  height: 70px;
-  width: 70px;
-  border-radius: 45px;
-  color: #FAF7F7;
-  cursor: pointer;
-  margin-bottom: 5px;
-  border: 2px solid white;
-}
-
 #photo-canvas {
   position: absolute;
   top: 50%;
@@ -460,6 +449,17 @@ button p {
 
 #paint-tool-bar button:hover {
   background-color: #232222;
+}
+
+#paint-button.tool-selected, #erase-button.tool-selected {
+  background-color: #161515;
+  height: 70px;
+  width: 70px;
+  border-radius: 45px;
+  color: #FAF7F7;
+  cursor: pointer;
+  margin-bottom: 5px;
+  border: 2px solid white;
 }
 
 
@@ -605,3 +605,4 @@ button p {
   box-shadow: 1px 1px 5px #919090;
   z-index: 1020;
 }
+

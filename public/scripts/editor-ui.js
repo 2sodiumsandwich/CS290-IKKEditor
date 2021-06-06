@@ -36,6 +36,7 @@ $(function() {
             $('.error-prompt').show();
         } else {
             $('#decoration-tool-bar').toggle();
+            $('#erase-button, #paint-button').removeClass("tool-selected");
             $('#decoration-tool-bar').css('z-index', zindex += 1);
             sticker_toggle != sticker_toggle;
             paint = false;
@@ -48,6 +49,7 @@ $(function() {
         if(!active) {
             $('.error-prompt').show();
         } else {
+            $('#erase-button, #paint-button').removeClass("tool-selected");
             cropping = !cropping;
             paint = false;
             is_erasing = false;
@@ -56,6 +58,8 @@ $(function() {
     })
 
     $('#paint-button').click(() => {
+        $('#erase-button, #paint-button').removeClass("tool-selected");
+        if(!paint) $('#paint-button').addClass("tool-selected");
         paint = !paint;
         is_erasing = false;
         cropping = false;
@@ -63,6 +67,8 @@ $(function() {
     });
 
     $('#erase-button').click(() => {
+        $('#erase-button, #paint-button').removeClass("tool-selected");
+        if(!is_erasing) $('#erase-button').addClass("tool-selected");
         is_erasing = !is_erasing;
         paint = false;
         cropping = false;
